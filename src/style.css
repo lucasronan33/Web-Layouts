@@ -5,7 +5,7 @@
     --margin_topo: 8.2147px;
     --margin_dir: 4.5491px;
     --cor_fonte_1: #2D2C4F;
-        --cor_fonte_2: #FFFFFF;
+    --cor_fonte_2: #FFFFFF;
 }
 
 @font-face
@@ -102,137 +102,141 @@ body
                     display: flex;
 
                     align-items: center;
+                }
 
-                
-                                .estilo_botao
-                                {
-                                    width: 161.7079px;
-                                    color: var(--cor_fonte_1);
-                                    font-size: 12pt;
-                
-                                    input
-                                    {
-                                        color: var(--cor_fonte_2);
-                            
-        }
+                .estilo_botao
+                {
+                    width: 161.7079px;
+                    height: 383517px;
+                    color: var(--cor_fonte_1);
+                    font-size: 12px;
 
-        .nmr_OS
-        {
-            width: 111.7173px;
-            height: 17.4086px;
-            margin: var(--margin_topo) 0px 0px 2.7436px;
+                    input
+                    {
+                        color: var(--cor_fonte_2);
 
-            background-color: rgba(255, 255, 0, 0.3);
-            grid-area: nmr_os;
+                    }
+                }
 
-            display: flex;
+                .nmr_OS
+                {
+                    width: 111.7173px;
+                    height: 17.4086px;
+                    margin: var(--margin_topo) 0px 0px 2.7436px;
 
-            label
-            {
-                width: auto;
-                margin-left: 7px;
-            }
+                    background-color: rgba(255, 255, 0, 0.3);
+                    grid-area: nmr_os;
 
-            input
-            {
-                width: 100%;
-                height: 100%;
-                border: none;
-                margin-left: 2.94px;
+                    display: flex;
 
-                background-color: rgba(255, 0, 0, 0.1);
-            }
-        }
+                    label
+                    {
+                        width: auto;
+                        margin-left: 7px;
+                    }
 
-        .layout_area_1
-        {
-            width: 425.5133px;
-            height: 35.1412px;
+                    input
+                    {
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        margin-left: 2.94px;
 
-            background-color: rgba(255, 0, 0, 0.1);
-            grid-area: layout_area_1;
-        }
+                        background-color: rgba(255, 0, 0, 0.1);
+                    }
+                }
 
-        .logo
-        {
-            width: 108.7112px;
-            height: 26.9729px;
-            margin: var(--margin_topo) 5.1526px 0px 0px;
+                .layout_area_1
+                {
+                    width: 425.5133px;
+                    height: 35.1412px;
 
-            background-image: url(../img/logo_showmais.png);
-            background-size: cover;
-            grid-area: logo;
-        }
+                    background-color: rgba(255, 0, 0, 0.1);
+                    grid-area: layout_area_1;
+                }
 
-        .layout_area_2
-        {
-            width: 656.2407px;
-            height: 520.6525px;
+                .logo
+                {
+                    width: 108.7112px;
+                    height: 26.9729px;
+                    margin: var(--margin_topo) 5.1526px 0px 0px;
 
-            background-color: rgba(255, 0, 0, 0.1);
-            grid-area: layout_area_2;
-        }
+                    background-image: url(../img/logo_showmais.png);
+                    background-size: cover;
+                    grid-area: logo;
+                }
 
-        .layout_area_3
-        {
-            width: 539.9742px;
-            height: 18.6438px;
+                .layout_area_2
+                {
+                    width: 656.2407px;
+                    height: 520.6525px;
 
-            background-color: rgba(255, 0, 0, 0.1);
-            grid-area: layout_area_3;
-            margin: 0px;
-        }
+                    background-color: rgba(255, 0, 0, 0.1);
+                    grid-area: layout_area_2;
+                }
 
-        .nav_bar_dir
-        {
-            width: 8.6596px;
-            height: 595.2756px;
+                .layout_area_3
+                {
+                    width: 539.9742px;
+                    height: 18.6438px;
 
-            grid-area: nav_bar_dir;
-        }
+                    background-color: rgba(255, 0, 0, 0.1);
+                    grid-area: layout_area_3;
+                    margin: 0px;
+                }
 
-        .nome_arte
-        {
-            width: 111.7173px;
-            height: 17.4086px;
+                .nav_bar_dir
+                {
+                    width: 8.6596px;
+                    height: 595.2756px;
 
-            grid-area: nome_arte;
-            margin: 0px 4.5491px 0px 0px;
+                    grid-area: nav_bar_dir;
+                }
 
-            label
-            {
-                margin-left: 7px;
-            }
+                .nome_arte
+                {
+                    width: 111.7173px;
+                    height: 17.4086px;
 
-            select
-            {
-                width: 58px;
-                appearance: none;
-                border: none;
-            }
-        }
+                    grid-area: nome_arte;
+                    margin: 0px 4.5491px 0px 0px;
 
-        .nome_caminho
-        {
-            width: 648.948px;
-            height: 17.4086px;
+                    label
+                    {
+                        margin-left: 7px;
+                    }
 
-            grid-area: nome_caminho;
-            margin: 0px 0px 2.7436px 3.2211px;
+                    select
+                    {
+                        width: 58px;
+                        appearance: none;
+                        border: none;
+                    }
+                }
 
-            label
-            {
-                width: 72.294px;
-                height: 100%;
-                margin-left: 4.05px;
-                color: white;
-            }
+                .nome_caminho
+                {
+                    width: 648.948px;
+                    height: 17.4086px;
 
-            input
-            {
-                width: 88%;
-                height: 100%;
-                border: none;
+                    grid-area: nome_caminho;
+                    margin: 0px 0px 2.7436px 3.2211px;
+
+                    label
+                    {
+                        width: 72.294px;
+                        height: 100%;
+                        margin-left: 4.05px;
+                        color: white;
+                    }
+
+                    input
+                    {
+                        width: 88%;
+                        height: 100%;
+                        border: none;
+                    }
+                }
             }
         }
     }
