@@ -4,6 +4,8 @@
     --altura_fundo: 595.2756px;
     --margin_topo: 8.2147px;
     --margin_dir: 4.5491px;
+    --cor_fonte_1: #2D2C4F;
+        --cor_fonte_2: #FFFFFF;
 }
 
 @font-face
@@ -60,8 +62,7 @@ body
             {
                 font-size: 8px;
                 line-height: 18.21px;
-                color: #2D2C4F;
-                color: rgb(45, 44, 79);
+                color: var(--cor_fonte_1);
             }
         }
 
@@ -102,8 +103,17 @@ body
 
                     align-items: center;
 
-                }
-            }
+                
+                                .estilo_botao
+                                {
+                                    width: 161.7079px;
+                                    color: var(--cor_fonte_1);
+                                    font-size: 12pt;
+                
+                                    input
+                                    {
+                                        color: var(--cor_fonte_2);
+                            
         }
 
         .nmr_OS
