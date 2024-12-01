@@ -12,6 +12,8 @@ slct_tipo_impressao.addEventListener('change', (event) => {
         label_tipoImpressao.style.display = 'none'
     }
 
+    // CODIGO TEMPORARIO
+    // alteração de gabarito de background
     let formCorpo = document.querySelector('.corpo')
 
     switch (tipoSelecionado) {
@@ -38,6 +40,17 @@ slct_tipo_impressao.addEventListener('change', (event) => {
         case 'lona':
             formCorpo.style.backgroundImage = 'url(../img/gabarito_layout_lona.png)'
             console.log('Background alterado')
+
+            let esconder = formCorpo.getElementsByClassName('estilo_botao')
+
+            let i
+            for (i = 6; i < esconder.length; i++) {
+
+                console.log('for:', esconder.length)
+                esconder[i].style.display = 'none'
+
+            }
+
             break;
 
         default:
@@ -45,6 +58,3 @@ slct_tipo_impressao.addEventListener('change', (event) => {
     }
 
 })
-
-
-// console.log(tipoSelecionado)
