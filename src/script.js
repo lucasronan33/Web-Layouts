@@ -46,6 +46,9 @@ slct_tipo_impressao.addEventListener('change', (event) => {
             let i
             for (i = 6; i < esconder.length; i++) {
 
+                if (i > 8) {
+                    break
+                }
                 console.log('for:', esconder.length)
                 esconder[i].style.display = 'none'
 
