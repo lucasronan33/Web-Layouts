@@ -15,6 +15,7 @@ slct_tipo_impressao.addEventListener('change', (event) => {
     // CODIGO TEMPORARIO
     // alteração de gabarito de background
     let formCorpo = document.querySelector('.corpo')
+    info_adicionalStyle = document.querySelector('.info_adicional').style
 
     switch (tipoSelecionado) {
         case 'uv':
@@ -53,6 +54,8 @@ slct_tipo_impressao.addEventListener('change', (event) => {
                 esconder[i].style.display = 'none'
 
             }
+
+            // info_adicionalStyle.marginBottom =
 
             break;
 

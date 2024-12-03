@@ -69,6 +69,8 @@ body {
 
       background-color: rgba(255, 255, 0, 0.3);
       grid-area: nav_bar;
+      display: flex;
+      flex-direction: column;
 
       .tipo_impressao {
         width: 161.7079px;
@@ -134,6 +136,8 @@ body {
 
       .info_adicional {
         height: 54.76px;
+        align-self: flex-end;
+        margin-bottom: 2.77px;
 
         label {
           height: 33.333%;
