@@ -131,29 +131,78 @@ body {
       }
 
       .informacoes_layout {
-        height: 468.6133px;
+        /* height: 456.991px; */
         display: grid;
-        grid-template-areas: 
-        'dimFinal'
-        'sangra'
-        'material'
-        'quantidade'
-        'impressao'
-        'cores'
-        'calco'
-        'corte'
-        'acabamento';
+        grid-template-areas:
+          'dimFinal'
+          'sangra'
+          'material'
+          'quantidade'
+          'impressao'
+          'cores'
+          'calco'
+          'corte'
+          'acabamento';
+
+        .bainha,
+        .mascara,
+        .laminacao {
+          display: none;
+        }
 
         .d_final {
           margin-top: 18.85px;
+          grid-area: dimFinal;
         }
-        .bainha,.mascara,.laminacao{
-          display: none;
+
+        .sangra {
+          grid-area: sangra;
+        }
+
+        .material {
+          grid-area: material;
+        }
+
+        .quantidade {
+          grid-area: quantidade;
+        }
+
+        .impressao {
+          grid-area: impressao;
+        }
+
+        .cores {
+          grid-area: cores;
+        }
+
+        .calco {
+          grid-area: calco;
+        }
+
+        .corte {
+          grid-area: corte;
+        }
+
+        .acabamento {
+          grid-area: acabamento;
+        }
+
+        .bainha {
+          grid-area: bainha;
+        }
+
+        .mascara {
+          grid-area: mascara;
+        }
+
+        .laminacao {
+          grid-area: laminacao;
         }
       }
+
       .info_adicional {
         height: 54.76px;
-        margin-top: 0;
+        margin-block: auto 2.7762px;
 
         label {
           height: 33.333%;

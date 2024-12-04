@@ -1,95 +1,135 @@
-const label_tipoImpressao = document.getElementById('label_slct_tipo_impressao')
-const slct_tipo_impressao = document.getElementById('slct_tipo_impressao')
-// onchange=(event)=>{}
+document.addEventListener("DOMContentLoaded", () => {
+  const label_tipoImpressao = document.getElementById(
+    "label_slct_tipo_impressao"
+  );
+  const slct_tipo_impressao = document.getElementById("slct_tipo_impressao");
+  // onchange=(event)=>{}
 
-slct_tipo_impressao.addEventListener('change', (event) => {
-    const tipoSelecionado = slct_tipo_impressao.value
+  slct_tipo_impressao.addEventListener("change", (event) => {
+    const tipoSelecionado = slct_tipo_impressao.value;
 
-    console.log(slct_tipo_impressao.value)
-    if (slct_tipo_impressao.value !== 'recorte') {
-        label_tipoImpressao.style.display = 'block'
+    console.log(slct_tipo_impressao.value);
+    if (slct_tipo_impressao.value !== "recorte") {
+      label_tipoImpressao.style.display = "block";
     } else {
-        label_tipoImpressao.style.display = 'none'
+      label_tipoImpressao.style.display = "none";
     }
 
     // CODIGO TEMPORARIO
     // alteração de gabarito de background
-    let formCorpo = document.querySelector('.corpo')
-    info_adicionalStyle = document.querySelector('.info_adicional').style
-    let classeElemento
+    let formCorpo = document.querySelector(".corpo");
+    info_adicionalStyle = document.querySelector(".info_adicional").style;
 
-    let i = 6
+    let informacoesLayout = document.querySelector(".informacoes_layout");
+    let estilos = {
+      informacoesLayout: document.querySelector(".informacoes_layout").style,
+      dimFinal: document.querySelector(".dim_final"),
+      sangra: document.querySelector(".sangra"),
+      material: document.querySelector(".material"),
+      quantidade: document.querySelector(".quantidade"),
+      impressao: document.querySelector(".impressao"),
+      cores: document.querySelector(".cores"),
+      calco: document.querySelector(".calco"),
+      corte: document.querySelector(".corte"),
+      acabamento: document.querySelector(".acabamento"),
+      bainha: document.querySelector(".bainha"),
+      mascara: document.querySelector(".mascara"),
+      laminacao: document.querySelector(".laminacao"),
+    };
+
+    let i = 6;
     function esconderEstiloBotao() {
-        let esconder = formCorpo.getElementsByClassName('estilo_botao')
-        for (i; i < esconder.length; i++) {
-
-            if (i > 8) {
-                break
-            }
-            console.log('for:', esconder.length)
-            esconder[i].style.display = 'none'
-
+      let esconder = formCorpo.getElementsByClassName("estilo_botao");
+      for (i; i < esconder.length; i++) {
+        if (i > 8) {
+          break;
         }
+        console.log("for:", esconder.length);
+        esconder[i].style.display = "none";
+      }
     }
     function mostrarEstiloBotao() {
-        let esconder = formCorpo.getElementsByClassName('estilo_botao')
-        for (i; i < esconder.length; i++) {
-
-            if (i > 8) {
-                break
-            }
-            console.log('for:', esconder.length)
-            esconder[i].style.display = 'flex'
-
-        }
+      let esconder = formCorpo.getElementsByClassName("estilo_botao");
+      for (i; i < esconder.length; i++) {
+        console.log("for:", esconder.length);
+        esconder[i].style.display = "flex";
+      }
     }
     switch (tipoSelecionado) {
-        case 'uv':
-            formCorpo.style.backgroundImage = 'url(../img/gabarito_layout_uv.png)'
-            console.log('Background alterado')
-            i = 6
-            console.log('i: ' + i)
+      case "uv":
+        formCorpo.style.backgroundImage = "url(../img/gabarito_layout_uv.png)";
+        console.log("Background alterado");
+        i = 6;
+        console.log("i: " + i);
 
-            mostrarEstiloBotao()
+        mostrarEstiloBotao();
 
-            break;
+        break;
 
-        case 'adesivo':
-            formCorpo.style.backgroundImage = 'url(../img/gabarito_layout_adesivo.png)'
-            console.log('Background alterado')
-            mostrarEstiloBotao()
-            break;
+      case "adesivo":
+        formCorpo.style.backgroundImage =
+          "url(../img/gabarito_layout_adesivo.png)";
+        console.log("Background alterado");
+        mostrarEstiloBotao();
+        break;
 
-        case 'recorte':
-            formCorpo.style.backgroundImage = 'url(../img/gabarito_layout_recorte.png)'
-            console.log('Background alterado')
+      case "recorte":
+        formCorpo.style.backgroundImage =
+          "url(../img/gabarito_layout_recorte.png)";
+        console.log("Background alterado");
 
-            console.log('i: ' + i)
-            mostrarEstiloBotao()
-            i = 7
-            esconderEstiloBotao()
+        console.log("i: " + i);
+        mostrarEstiloBotao();
+        i = 7;
+        esconderEstiloBotao();
 
-            break;
+        break;
 
-        case 'tecido':
-            formCorpo.style.backgroundImage = 'url(../img/gabarito_layout_lona.png)'
-            console.log('Background alterado')
+      case "tecido":
+        formCorpo.style.backgroundImage =
+          "url(../img/gabarito_layout_lona.png)";
+        console.log("Background alterado");
 
-            mostrarEstiloBotao()
-            i = 6
-            esconderEstiloBotao()
+        mostrarEstiloBotao();
+        i = 6;
+        esconderEstiloBotao();
 
-            break;
+        break;
 
-        case 'lona':
-            formCorpo.style.backgroundImage = 'url(../img/gabarito_layout_lona.png)'
-            console.log('Background alterado')
+      case "lona":
+        formCorpo.style.backgroundImage =
+          "url(../img/gabarito_layout_lona.png)";
+        console.log("Background alterado");
 
-            mostrarEstiloBotao()
-            i = 6
-            esconderEstiloBotao()
+        mostrarEstiloBotao();
 
-            break;
+        estilos.impressao.style.display = "none";
+        estilos.cores.style.display = "none";
+        estilos.calco.style.display = "none";
+        estilos.corte.style.display = "none";
+        estilos.laminacao.style.display = "none";
+        estilos.mascara.style.display = "none";
+        estilos.bainha.style.display = "flex";
+
+        estilos.informacoesLayout.gridTemplateAreas = `'dimFinal'
+          'sangra'
+          'material'
+          'quantidade'
+          'acabamento'
+          'bainha'
+          '.'
+          '.'
+          '.'`;
+
+        console.log(
+          estilos.impressao.style.display,
+          estilos.cores.style.display,
+          estilos.calco.style.display,
+          estilos.corte.style.display,
+          estilos.bainha.style.display
+        );
+
+        break;
     }
-
-})
+  });
+});
