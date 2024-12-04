@@ -132,12 +132,25 @@ body {
 
       .informacoes_layout {
         height: 468.6133px;
+        display: grid;
+        grid-template-areas: 
+        'dimFinal'
+        'sangra'
+        'material'
+        'quantidade'
+        'impressao'
+        'cores'
+        'calco'
+        'corte'
+        'acabamento';
 
         .d_final {
           margin-top: 18.85px;
         }
+        .bainha,.mascara,.laminacao{
+          display: none;
+        }
       }
-
       .info_adicional {
         height: 54.76px;
         margin-top: 0;
@@ -155,6 +168,7 @@ body {
           border: none;
         }
       }
+
     }
 
     .nmr_OS {
