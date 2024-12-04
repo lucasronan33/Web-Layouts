@@ -50,12 +50,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mostrarEstiloBotao();
 
+        estilos.mascara.style.display = "none";
+        estilos.laminacao.style.display = "none";
+        estilos.bainha.style.display = "none";
+
+        estilos.informacoesLayout.gridTemplateAreas = `'dimFinal'
+          'sangra'
+          'material'
+          'quantidade'
+          'impressao'
+          'cores'
+          'calco'
+          'corte'
+          'acabamento'`;
         break;
 
       case "adesivo":
         formCorpo.style.backgroundImage =
           "url(../img/gabarito_layout_adesivo.png)";
+
         mostrarEstiloBotao();
+
+        estilos.cores.style.display = "none";
+        estilos.calco.style.display = "none";
+        estilos.bainha.style.display = "none";
+
+        estilos.informacoesLayout.gridTemplateAreas = `'dimFinal'
+          'sangra'
+          'material'
+          'quantidade'
+          'impressao'
+          'laminacao'
+          'corte'
+          'mascara'
+          'acabamento'`;
         break;
 
       case "recorte":
@@ -64,19 +92,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mostrarEstiloBotao();
 
+        estilos.impressao.style.display = "none";
+        estilos.cores.style.display = "none";
+        estilos.calco.style.display = "none";
+        estilos.laminacao.style.display = "none";
+        estilos.bainha.style.display = "none";
+
+        estilos.informacoesLayout.gridTemplateAreas = `'dimFinal'
+          'sangra'
+          'material'
+          'quantidade'
+          'corte'
+          'mascara'
+          'acabamento'
+          '.'
+          '.'`;
+
         break;
 
       case "tecido":
         formCorpo.style.backgroundImage =
           "url(../img/gabarito_layout_lona.png)";
-
-        mostrarEstiloBotao();
-        break;
-
-      case "lona":
-        formCorpo.style.backgroundImage =
-          "url(../img/gabarito_layout_lona.png)";
-        console.log("Background alterado");
 
         mostrarEstiloBotao();
 
@@ -86,7 +122,30 @@ document.addEventListener("DOMContentLoaded", () => {
         estilos.corte.style.display = "none";
         estilos.laminacao.style.display = "none";
         estilos.mascara.style.display = "none";
-        estilos.bainha.style.display = "flex";
+
+        estilos.informacoesLayout.gridTemplateAreas = `'dimFinal'
+          'sangra'
+          'material'
+          'quantidade'
+          'acabamento'
+          'bainha'
+          '.'
+          '.'
+          '.'`;
+        break;
+
+      case "lona":
+        formCorpo.style.backgroundImage =
+          "url(../img/gabarito_layout_lona.png)";
+
+        mostrarEstiloBotao();
+
+        estilos.impressao.style.display = "none";
+        estilos.cores.style.display = "none";
+        estilos.calco.style.display = "none";
+        estilos.corte.style.display = "none";
+        estilos.laminacao.style.display = "none";
+        estilos.mascara.style.display = "none";
 
         estilos.informacoesLayout.gridTemplateAreas = `'dimFinal'
           'sangra'
