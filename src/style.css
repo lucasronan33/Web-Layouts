@@ -128,6 +128,14 @@ body {
           color: var(--cor_fonte_2);
           text-align: center;
         }
+
+        select {
+          appearance: none;
+          border: none;
+          display: flex;
+
+          align-items: center;
+        }
       }
 
       .informacoes_layout {
