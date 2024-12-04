@@ -37,17 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       laminacao: document.querySelector(".laminacao"),
     };
 
-    let i = 6;
-    function esconderEstiloBotao() {
-      let esconder = formCorpo.getElementsByClassName("estilo_botao");
-      for (i; i < esconder.length; i++) {
-        if (i > 8) {
-          break;
-        }
-        console.log("for:", esconder.length);
-        esconder[i].style.display = "none";
-      }
-    }
+    let i = 0;
     function mostrarEstiloBotao() {
       let esconder = formCorpo.getElementsByClassName("estilo_botao");
       for (i; i < esconder.length; i++) {
