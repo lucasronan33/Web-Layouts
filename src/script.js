@@ -41,16 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function mostrarEstiloBotao() {
       let esconder = formCorpo.getElementsByClassName("estilo_botao");
       for (i; i < esconder.length; i++) {
-        console.log("for:", esconder.length);
         esconder[i].style.display = "flex";
       }
     }
     switch (tipoSelecionado) {
       case "uv":
         formCorpo.style.backgroundImage = "url(../img/gabarito_layout_uv.png)";
-        console.log("Background alterado");
-        i = 6;
-        console.log("i: " + i);
 
         mostrarEstiloBotao();
 
@@ -59,31 +55,22 @@ document.addEventListener("DOMContentLoaded", () => {
       case "adesivo":
         formCorpo.style.backgroundImage =
           "url(../img/gabarito_layout_adesivo.png)";
-        console.log("Background alterado");
         mostrarEstiloBotao();
         break;
 
       case "recorte":
         formCorpo.style.backgroundImage =
           "url(../img/gabarito_layout_recorte.png)";
-        console.log("Background alterado");
 
-        console.log("i: " + i);
         mostrarEstiloBotao();
-        i = 7;
-        esconderEstiloBotao();
 
         break;
 
       case "tecido":
         formCorpo.style.backgroundImage =
           "url(../img/gabarito_layout_lona.png)";
-        console.log("Background alterado");
 
         mostrarEstiloBotao();
-        i = 6;
-        esconderEstiloBotao();
-
         break;
 
       case "lona":
