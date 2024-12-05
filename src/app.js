@@ -18,13 +18,9 @@ console.log("Servindo arquivos estáticos de:", path.join(__dirname, "../"));
 
 // Rota para template EJS
 app.get("/", (req, res) => {
-  res.render("index");
+  res.sendFile("index");
 });
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
-
-
-// Configuração para Vercel (função serverless)
-module.exports = app;
