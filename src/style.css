@@ -128,6 +128,14 @@ body {
           color: var(--cor_fonte_2);
           text-align: center;
         }
+        select{
+          appearance: none;
+          border: none;
+          display: flex;
+
+          align-items: center;
+
+        }
       }
 
       .informacoes_layout {
@@ -165,6 +173,26 @@ body {
 
         .quantidade {
           grid-area: quantidade;
+
+          .grupo_quantidade{
+            display: flex;
+
+            input{
+              width: 25%;
+              height: 100%;
+              margin-inline: auto 1px;
+              text-align: right;
+            }
+            select{
+              width: auto;
+              height: 100%;
+              display: flex;
+              margin-inline: 0px auto;  
+              option{
+                text-align: left;
+              }
+            }
+          }
         }
 
         .impressao {

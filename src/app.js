@@ -18,8 +18,9 @@ console.log("Servindo arquivos estáticos de:", path.join(__dirname, "../"));
 
 // Rota para template EJS
 app.get("/", (req, res) => {
-  res.sendFile("index");
+  res.sendFile(path.join(__dirname, "../index.html"));
 });
+console.log(__dirname, 'index.html')
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
