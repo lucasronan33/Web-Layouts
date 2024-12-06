@@ -62,12 +62,20 @@ body {
       }
     }
 
+    .nav_bar,
+    .nav_bar_dir,
+    .nome_arte,
+    .nome_caminho {
+      background-image: url(../img/fundo_nav_bar.png);
+      background-clip: content-box;
+      background-size: cover;
+    }
+
     .nav_bar {
       width: 177.2654px;
       height: 100%;
       margin: 0;
 
-      background-color: rgba(255, 255, 0, 0.3);
       grid-area: nav_bar;
       display: flex;
       flex-direction: column;
@@ -321,6 +329,7 @@ body {
     .nome_arte {
       width: 111.7173px;
       height: 17.4086px;
+      background-clip: content-box;
 
       grid-area: nome_arte;
       margin: 0px 4.5491px 0px 0px;
@@ -339,6 +348,7 @@ body {
     .nome_caminho {
       width: 648.948px;
       height: 17.4086px;
+      background-size: 30%;
 
       grid-area: nome_caminho;
       margin: 0px 0px 2.7436px 3.2211px;
