@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     switch (tipoSelecionado) {
       case "uv":
-        formCorpo.style.backgroundImage = "url(../img/gabarito_layout_uv.png)";
+        // formCorpo.style.backgroundImage = "url(../img/gabarito_layout_uv.png)";
 
         mostrarEstiloBotao();
 
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "adesivo":
-        formCorpo.style.backgroundImage =
-          "url(../img/gabarito_layout_adesivo.png)";
+        // formCorpo.style.backgroundImage =
+        // "url(../img/gabarito_layout_adesivo.png)";
 
         mostrarEstiloBotao();
 
@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "recorte":
-        formCorpo.style.backgroundImage =
-          "url(../img/gabarito_layout_recorte.png)";
+        // formCorpo.style.backgroundImage =
+        // "url(../img/gabarito_layout_recorte.png)";
 
         mostrarEstiloBotao();
 
@@ -111,8 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "tecido":
-        formCorpo.style.backgroundImage =
-          "url(../img/gabarito_layout_lona.png)";
+        // formCorpo.style.backgroundImage =
+        // "url(../img/gabarito_layout_lona.png)";
 
         mostrarEstiloBotao();
 
@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "lona":
-        formCorpo.style.backgroundImage =
-          "url(../img/gabarito_layout_lona.png)";
+        // formCorpo.style.backgroundImage =
+        // "url(../img/gabarito_layout_lona.png)";
 
         mostrarEstiloBotao();
 
