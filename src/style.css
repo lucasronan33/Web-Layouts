@@ -37,12 +37,6 @@ body {
     /* background-image: url(../img/gabarito_layout_uv.png); */
     background-size: cover;
     background-repeat: no-repeat;
-    /*fundo*/
-    background-color: rgba(255, 0, 0, 0.1);
-
-    * {
-      background-color: rgba(255, 255, 0, 0.3);
-    }
 
     input {
       border: none;
@@ -57,23 +51,20 @@ body {
 
       * {
         font-size: 8px;
+        background-color: rgba(255, 255, 255, 0);
         line-height: 18.21px;
         color: var(--cor_fonte_1);
       }
-    }
-
-    .nav_bar,
-    .nav_bar_dir,
-    .nome_arte,
-    .nome_caminho {
-      background-image: url(../img/fundo_nav_bar.png);
-      background-clip: content-box;
-      background-size: cover;
+      ::placeholder{
+          color: var(--cor_fonte_1);
+        }
     }
 
     .nav_bar {
       width: 177.2654px;
       height: 100%;
+      background-image: url(../img/fundo_nav_bar.png);
+      background-size: cover;
       margin: 0;
 
       grid-area: nav_bar;
@@ -85,12 +76,14 @@ body {
         height: 60.4625px;
         margin-top: 8.66px;
         border-radius: 6.1946px;
+        background-color: rgba(255, 255, 255, 0.43);
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
 
         * {
           width: 100%;
+          background-color: rgba(255, 255, 255, 0);
           font-size: 20px;
           color: white;
           text-align: center;
@@ -111,6 +104,7 @@ body {
         width: 161.7079px;
         height: 38.3517px;
         margin-top: 11.62px;
+        background-color: rgba(255, 255, 255, 0.23); 
         color: var(--cor_fonte_1);
         font-size: 12px;
         text-align: center;
@@ -123,16 +117,19 @@ body {
         label {
           width: 100%;
           height: 50%;
+          background-color: rgba(255, 255, 255, 0.19); 
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: rgba(255, 0, 0, 0.1);
-          /* padding-bottom: 5px; */
+        }
+        input::placeholder{
+          color: var(--cor_fonte_2);
         }
 
         :not(label) {
           width: 100%;
           height: 50%;
+          background-color: rgba(255, 255, 255, 0);
           color: var(--cor_fonte_2);
           text-align: center;
         }
@@ -170,7 +167,6 @@ body {
       }
 
       .informacoes_layout {
-        /* height: 456.991px; */
         display: grid;
         grid-template-areas:
           'dimFinal'
@@ -275,6 +271,9 @@ body {
           resize: none;
           border: none;
         }
+        ::placeholder{
+          color: var(--cor_fonte_2);
+        }
       }
 
     }
@@ -282,9 +281,9 @@ body {
     .nmr_OS {
       width: 111.7173px;
       height: 17.4086px;
+            background-image: url(../img/fundo_nmr_os.png);
+            background-size: cover;
       margin: var(--margin_topo) 0px 0px 2.7436px;
-
-      background-color: rgba(255, 255, 0, 0.3);
       grid-area: nmr_os;
 
       display: flex;
@@ -299,16 +298,12 @@ body {
         height: 100%;
         border: none;
         margin-left: 2.94px;
-
-        background-color: rgba(255, 0, 0, 0.1);
       }
     }
 
     .layout_area_1 {
       width: 425.5133px;
       height: 35.1412px;
-
-      background-color: rgba(255, 0, 0, 0.1);
       grid-area: layout_area_1;
     }
 
@@ -325,16 +320,12 @@ body {
     .layout_area_2 {
       width: 656.2407px;
       height: 520.6525px;
-
-      background-color: rgba(255, 0, 0, 0.1);
       grid-area: layout_area_2;
     }
 
     .layout_area_3 {
       width: 539.9742px;
       height: 18.6438px;
-
-      background-color: rgba(255, 0, 0, 0.1);
       grid-area: layout_area_3;
       margin: 0px;
     }
@@ -342,13 +333,16 @@ body {
     .nav_bar_dir {
       width: 8.6596px;
       height: 595.2756px;
-
+            background-image: url(../img/fundo_nav_bar_dir.png);
+            background-size: cover;
       grid-area: nav_bar_dir;
     }
 
     .nome_arte {
       width: 111.7173px;
       height: 17.4086px;
+            background-image: url(../img/fundo_nome_arte.png);
+            background-size: cover;
       background-clip: content-box;
 
       grid-area: nome_arte;
@@ -368,8 +362,8 @@ body {
     .nome_caminho {
       width: 648.948px;
       height: 17.4086px;
-      background-size: 30%;
-
+            background-image: url(../img/fundo_nome_caminho.png);
+            background-size: cover;
       grid-area: nome_caminho;
       margin: 0px 0px 2.7436px 3.2211px;
 
