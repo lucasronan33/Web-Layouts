@@ -97,6 +97,10 @@ body {
           display: flex;
 
           align-items: center;
+
+          option{
+            color: #5E4F9C;
+          }
         }
       }
 
@@ -140,6 +144,10 @@ body {
           display: flex;
 
           align-items: center;
+
+          option{
+            color: #5E4F9C;
+          }
         }
 
         .grupo_quantidade {
