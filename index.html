@@ -125,8 +125,21 @@
 
       <div class="logo"></div>
 
-      <div class="layout_area_2" id="layout_area">
-        <p>Área para exibir imagem</p>
+      <div
+        class="layout_area_2"
+        id="layout_area"
+        style="
+          position: relative;
+          width: 800px;
+          height: 600px;
+          border: 1px solid #ccc;
+        "
+      >
+        <canvas id="pdf-canvas"></canvas>
+        <canvas
+          id="cotas-canvas"
+          style="position: absolute; top: 0; left: 0; pointer-events: none"
+        ></canvas>
       </div>
 
       <div class="layout_area_3"></div>

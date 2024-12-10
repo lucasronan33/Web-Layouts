@@ -170,7 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const uploadPdfInput = document.getElementById("upload_pdf");
-  const pdfRender = document.getElementById("layout_area");
+  const pdfCanvas = document.getElementById("pdf-canvas");
+  const cotasCanvas = document.getElementById("cotas-canvas");
+  const container = document.getElementById("layout_area");
+
+  const pdfCtx = pdfCanvas.getContext("2d");
+  const cotasCtx = cotasCanvas.getContext("2d");
 
   uploadPdfInput.addEventListener("change", async (event) => {
     const file = event.target.files[0];
@@ -179,36 +184,66 @@ document.addEventListener("DOMContentLoaded", () => {
       const pdf = await pdfjsLib.getDocument(pdfURL).promise;
       const page = await pdf.getPage(1); // Renderiza apenas a primeira página
 
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-      pdfRender.innerHTML = ""; // Limpa a área
-      pdfRender.appendChild(canvas);
+      // Obtém as dimensões reais da página (em pontos, 1 ponto = 1/72 polegada)
+      const originalViewport = page.getViewport({ scale: 1 });
+      const pdfWidthPoints = originalViewport.width;
+      const pdfHeightPoints = originalViewport.height;
 
-      // Dimensões da div de exibição
-      const divWidth = pdfRender.offsetWidth;
-      const divHeight = pdfRender.offsetHeight;
+      // Converte dimensões em pontos para milímetros
+      const pdfWidthMm = (pdfWidthPoints / 72) * 25.4; // Largura em mm
+      const pdfHeightMm = (pdfHeightPoints / 72) * 25.4; // Altura em mm
 
-      // Calcula o viewport do PDF
-      const viewport = page.getViewport({ scale: 1 });
-
-      // Determina a escala para limitar ao tamanho máximo da div
+      // Calcula escala para ajustar ao container
+      const containerWidth = container.offsetWidth;
+      const containerHeight = container.offsetHeight;
       const scale = Math.min(
-        divWidth / viewport.width,
-        divHeight / viewport.height
+        containerWidth / pdfWidthPoints,
+        containerHeight / pdfHeightPoints
       );
 
       // Atualiza o viewport com a escala calculada
       const scaledViewport = page.getViewport({ scale });
 
-      // Ajusta o canvas para as novas dimensões
-      canvas.width = scaledViewport.width;
-      canvas.height = scaledViewport.height;
+      // Ajusta os canvases às dimensões escaladas
+      pdfCanvas.width = scaledViewport.width;
+      pdfCanvas.height = scaledViewport.height;
 
-      // Renderiza o PDF com o contexto ajustado
+      cotasCanvas.width = scaledViewport.width;
+      cotasCanvas.height = scaledViewport.height;
+
+      // Renderiza o PDF no canvas principal
       await page.render({
-        canvasContext: context,
+        canvasContext: pdfCtx,
         viewport: scaledViewport,
       }).promise;
+
+      // Renderiza as cotas no canvas de cotas
+      cotasCtx.clearRect(0, 0, cotasCanvas.width, cotasCanvas.height); // Limpa o canvas
+      cotasCtx.font = "14px Arial";
+      cotasCtx.fillStyle = "cyan";
+      cotasCtx.strokeStyle = "cyan";
+
+      // Cotas horizontais
+      cotasCtx.beginPath();
+      cotasCtx.moveTo(0, scaledViewport.height - 10);
+      cotasCtx.lineTo(scaledViewport.width, scaledViewport.height - 10);
+      cotasCtx.stroke();
+      cotasCtx.fillText(
+        `${pdfWidthMm.toFixed(2)} mm`,
+        scaledViewport.width / 2 - 60,
+        scaledViewport.height - 15
+      );
+
+      // Cotas verticais
+      cotasCtx.beginPath();
+      cotasCtx.moveTo(scaledViewport.width - 10, 0);
+      cotasCtx.lineTo(scaledViewport.width - 10, scaledViewport.height);
+      cotasCtx.stroke();
+      cotasCtx.save();
+      cotasCtx.translate(scaledViewport.width - 15, scaledViewport.height / 2);
+      cotasCtx.rotate(-Math.PI / 2);
+      cotasCtx.fillText(`${pdfHeightMm.toFixed(2)} mm`, -50, 0);
+      cotasCtx.restore();
     }
   });
 });
