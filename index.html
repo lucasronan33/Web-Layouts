@@ -154,32 +154,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
-    <div id="pdf-render"></div>
-    <script>
-      const uploadPdfInput = document.getElementById("upload_pdf");
-      const pdfRender = document.getElementById("pdf-render");
-
-      uploadPdfInput.addEventListener("change", async (event) => {
-        const file = event.target.files[0];
-        if (file) {
-          const pdfURL = URL.createObjectURL(file);
-          const pdf = await pdfjsLib.getDocument(pdfURL).promise;
-          const page = await pdf.getPage(1); // Renderiza apenas a primeira página
-
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
-          const viewport = page.getViewport({ scale: 1 });
-
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-          pdfRender.innerHTML = ""; // Limpa a área
-          pdfRender.appendChild(canvas);
-
-          page.render({ canvasContext: context, viewport });
-        }
-      });
-    </script>
     <script src="./src/script.js"></script>
   </body>
 </html>

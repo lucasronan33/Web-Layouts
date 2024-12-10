@@ -168,4 +168,47 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
   });
+
+  const uploadPdfInput = document.getElementById("upload_pdf");
+  const pdfRender = document.getElementById("layout_area");
+
+  uploadPdfInput.addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const pdfURL = URL.createObjectURL(file);
+      const pdf = await pdfjsLib.getDocument(pdfURL).promise;
+      const page = await pdf.getPage(1); // Renderiza apenas a primeira página
+
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      pdfRender.innerHTML = ""; // Limpa a área
+      pdfRender.appendChild(canvas);
+
+      // Dimensões da div de exibição
+      const divWidth = pdfRender.offsetWidth;
+      const divHeight = pdfRender.offsetHeight;
+
+      // Calcula o viewport do PDF
+      const viewport = page.getViewport({ scale: 1 });
+
+      // Determina a escala para limitar ao tamanho máximo da div
+      const scale = Math.min(
+        divWidth / viewport.width,
+        divHeight / viewport.height
+      );
+
+      // Atualiza o viewport com a escala calculada
+      const scaledViewport = page.getViewport({ scale });
+
+      // Ajusta o canvas para as novas dimensões
+      canvas.width = scaledViewport.width;
+      canvas.height = scaledViewport.height;
+
+      // Renderiza o PDF com o contexto ajustado
+      await page.render({
+        canvasContext: context,
+        viewport: scaledViewport,
+      }).promise;
+    }
+  });
 });
