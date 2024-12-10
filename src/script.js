@@ -168,25 +168,4 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
   });
-
-  // Seleciona o input de upload e a área de layout
-  const uploadInput = document.getElementById("upload_input");
-  const layoutArea = document.getElementById("layout_area");
-
-  // Evento para carregar a imagem
-  uploadInput.addEventListener("change", (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      // Cria um URL para a imagem carregada
-      const imgURL = URL.createObjectURL(file);
-      // Cria um elemento <img> e o adiciona na área
-      const img = document.createElement("img");
-      img.src = imgURL;
-      img.alt = "Imagem carregada";
-      img.style.maxWidth = "100%"; // Adapta a largura
-      img.style.maxHeight = "100%"; // Adapta a altura
-      layoutArea.innerHTML = ""; // Limpa a área antes de adicionar
-      layoutArea.appendChild(img); // Adiciona a imagem
-    }
-  });
 });
