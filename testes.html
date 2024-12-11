@@ -9,6 +9,11 @@
       #corpo {
         height: 700px;
         background-color: red;
+        .teste1 {
+          width: 70px;
+          height: 70px;
+          background-color: aqua;
+        }
       }
     </style>
   </head>
@@ -23,8 +28,14 @@
     const corpo = document.getElementById("corpo");
     estiloCorpo = corpo.style;
 
+    let numero = 0;
     corpo.addEventListener("click", () => {
-      estiloCorpo.background = "blue";
+      let criar = document.createElement("div");
+      criar.className = "teste1";
+      numero++;
+      criar.innerText = `${numero}`;
+
+      corpo.appendChild(criar);
     });
   </script>
 </html>
