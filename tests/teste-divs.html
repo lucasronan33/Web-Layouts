@@ -9,7 +9,7 @@
       #corpo {
         height: 700px;
         background-color: red;
-        .teste1 {
+        .teste {
           width: 70px;
           height: 70px;
           background-color: aqua;
@@ -31,9 +31,10 @@
     let numero = 0;
     corpo.addEventListener("click", () => {
       let criar = document.createElement("div");
-      criar.className = "teste1";
-      numero++;
+      criar.className = "teste";
+      criar.id = "teste" + numero;
       criar.innerText = `${numero}`;
+      numero++;
 
       corpo.appendChild(criar);
     });
