@@ -31,6 +31,7 @@
 
   <body>
     <div id="corpo"></div>
+    <input type="file" />
   </body>
 
   <script>
@@ -43,23 +44,26 @@
       const criarInput = document.createElement("input");
       criarInput.type = "file";
       criarInput.accept = "image/*";
+      criarInput.setAttribute("multiple", "");
 
       criarInput.addEventListener("change", async (event) => {
-        const arquivo = event.target.files[0];
+        const arquivos = event.target.files;
 
-        if (arquivo) {
-          const arquivoURL = URL.createObjectURL(arquivo);
+        for (const arquivo of arquivos) {
+          if (arquivo) {
+            const arquivoURL = URL.createObjectURL(arquivo);
 
-          let criarElemento = document.createElement("div");
-          criarElemento.classList.add("container-img");
-          let criarImg = document.createElement("img"); //criar elementos no HTML
+            let criarElemento = document.createElement("div");
+            criarElemento.classList.add("container-img");
+            let criarImg = document.createElement("img"); //criar elementos no HTML
 
-          criarImg.src = arquivoURL;
-          // criarElemento.style.maxWidth = "100%";
-          // criarElemento.style.maxHeight = "100%";
+            criarImg.src = arquivoURL;
+            // criarElemento.style.maxWidth = "100%";
+            // criarElemento.style.maxHeight = "100%";
 
-          corpo.appendChild(criarElemento); //aonde o elemento vai ser criado
-          criarElemento.appendChild(criarImg);
+            corpo.appendChild(criarElemento); //aonde o elemento vai ser criado
+            criarElemento.appendChild(criarImg);
+          }
         }
       });
       criarInput.click();
