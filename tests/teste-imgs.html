@@ -6,52 +6,60 @@
     <title>Testes</title>
 
     <style>
-      #corpo {
-        width: 1000px;
-        height: 700px;
-        background-color: red;
-
-        overflow: hidden;
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      body {
+        display: flex;
+        align-content: center;
         justify-content: center;
-        align-items: center;
-        .container-img {
-          width: auto;
-          height: auto;
+        #corpo {
+          width: 1000px;
+          height: 700px;
+          border: 1px solid red;
+
+          overflow: hidden;
+          position: relative;
           display: grid;
-          grid-template-columns: auto auto;
-          grid-template-rows: auto 1fr;
-          grid-template-areas:
-            ". largura"
-            "altura img";
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           justify-content: center;
-          justify-items: center;
           align-items: center;
+          .container-img {
+            width: auto;
+            height: auto;
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+              ". largura"
+              "altura img";
+            justify-content: center;
+            justify-items: center;
+            align-items: center;
+            color: cornflowerblue;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt;
 
-          #altura {
-            height: 100%;
-            /* invertendo os sentidos */
-            transform: rotate(180deg);
-            border-left: 2px solid aqua;
-            grid-area: altura;
-            writing-mode: vertical-lr;
-            text-align: center;
-          }
-          #largura {
-            width: 100%;
-            border-bottom: 2px solid yellow;
-            grid-area: largura;
-            text-align: center;
-          }
+            .altura {
+              height: 100%;
+              /* invertendo os sentidos */
+              transform: rotate(180deg);
+              border-left: 2px solid cornflowerblue;
+              grid-area: altura;
+              writing-mode: vertical-lr;
+              text-align: center;
+            }
+            .largura {
+              width: 100%;
+              border-bottom: 2px solid cornflowerblue;
+              grid-area: largura;
+              text-align: center;
+            }
 
-          img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: block;
-            grid-area: img;
+            img {
+              max-width: 100%;
+              max-height: 100%;
+              object-fit: contain;
+              display: block;
+              grid-area: img;
+            }
           }
         }
       }
@@ -61,8 +69,8 @@
   <body>
     <div id="corpo">
       <div class="container-img">
-        <div id="altura">123456</div>
-        <div id="largura">123456</div>
+        <div class="altura">123456</div>
+        <div class="largura">123456</div>
         <img src="../img/logo_showmais.png" alt="" srcset="" />
       </div>
     </div>
