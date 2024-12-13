@@ -31,7 +31,7 @@
             grid-template-rows: auto 1fr;
             grid-template-areas:
               ". largura"
-              "altura img";
+              "altura img-lixeira";
             justify-content: center;
             justify-items: center;
             align-items: center;
@@ -55,12 +55,42 @@
               text-align: center;
             }
 
-            img {
-              max-width: 100%;
-              max-height: 100%;
-              object-fit: contain;
-              display: block;
-              grid-area: img;
+            .img-lixeira {
+              position: relative;
+              grid-area: img-lixeira;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .arquivo_layout {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                display: block;
+              }
+              .lixeira {
+                display: none;
+              }
+            }
+
+            .img-lixeira:hover {
+              .lixeira {
+                display: flex;
+
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: #96969671;
+                background-size: 100%;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                  height: 80%;
+                  object-fit: contain;
+                  position: absolute;
+                }
+              }
             }
           }
         }
@@ -70,10 +100,20 @@
 
   <body>
     <div id="corpo">
-      <!-- <div class="container-img">
+      <div class="container-img">
         <div class="altura">123456</div>
         <div class="largura">123456</div>
-        <img src="../img/logo_showmais.png" alt="" srcset="" /> -->
+        <div class="img-lixeira">
+          <div class="lixeira">
+            <img src="../img/ico_lixeira.png" alt="" srcset="" />
+          </div>
+          <img
+            src="../img/logo_showmais.png"
+            alt=""
+            srcset=""
+            class="arquivo_layout"
+          />
+        </div>
       </div>
     </div>
   </body>
@@ -109,18 +149,18 @@
 
             corpo.appendChild(criarElemento); //aonde o elemento vai ser criado
             criarElemento.appendChild(cotaAltura);
-            criarElemento.appendChild( cotaLargura);
+            criarElemento.appendChild(cotaLargura);
             criarElemento.appendChild(criarImg);
 
             criarImg.onload = () => {
-              const PPI=100  //Pixel por polegada (padrão por tela)
-              const polegadasParaMM=35.278  //1 polegada = 2,54cm
+              const PPI = 100; //Pixel por polegada (padrão por tela)
+              const polegadasParaMM = 35.278; //1 polegada = 2,54cm
 
-              const larguraMM=(criarImg.naturalWidth/PPI)*polegadasParaMM
-              const alturaMM=(criarImg.naturalHeight/PPI)*polegadasParaMM
+              const larguraMM = (criarImg.naturalWidth / PPI) * polegadasParaMM;
+              const alturaMM = (criarImg.naturalHeight / PPI) * polegadasParaMM;
 
-              cotaAltura.innerText = alturaMM.toFixed(2)+'mm';  //toFixed(n) define a quantidade de casas decimais
-              cotaLargura.innerText = larguraMM.toFixed(2)+'mm';  //toFixed(n) define a quantidade de casas decimais
+              cotaAltura.innerText = alturaMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
+              cotaLargura.innerText = larguraMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
 
               console.log(`largura: ${larguraMM}
               altura: ${alturaMM}`);
