@@ -113,8 +113,8 @@
             criarElemento.appendChild(criarImg);
 
             criarImg.onload = () => {
-              const PPI=96  //Pixel por polegada (padrão por tela)
-              const polegadasParaMM=25.4  //1 polegada = 2,54cm
+              const PPI=100  //Pixel por polegada (padrão por tela)
+              const polegadasParaMM=35.278  //1 polegada = 2,54cm
 
               const larguraMM=(criarImg.naturalWidth/PPI)*polegadasParaMM
               const alturaMM=(criarImg.naturalHeight/PPI)*polegadasParaMM
