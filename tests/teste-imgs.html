@@ -114,15 +114,17 @@
         </div>
       </div> -->
     </div>
+    <button id="escolherArquivo">arquivo</button>
   </body>
 
   <script>
     const corpo = document.getElementById("corpo");
+    const botao = document.getElementById("escolherArquivo");
     estiloCorpo = corpo.style;
 
     let numeroElemento = 0;
 
-    corpo.addEventListener("click", () => {
+    botao.addEventListener("click", () => {
       const criarInput = document.createElement("input");
       criarInput.type = "file";
       criarInput.accept = "image/*";
@@ -178,6 +180,11 @@
 
               console.log(`largura: ${larguraMM}
               altura: ${alturaMM}`);
+
+              // Adicionando funcionalidade para excluir a ramificação
+              srcLixeira.addEventListener("click", () => {
+                container_img.remove(); // Remove a div pai da lixeira
+              });
             };
           }
         }
