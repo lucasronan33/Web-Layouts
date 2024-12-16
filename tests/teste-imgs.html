@@ -117,9 +117,15 @@
     <button id="escolherArquivo">arquivo</button>
   </body>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
     const corpo = document.getElementById("corpo");
     const botao = document.getElementById("escolherArquivo");
+
+    // Configuração do caminho para o worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+
     estiloCorpo = corpo.style;
 
     let numeroElemento = 0;
@@ -127,7 +133,7 @@
     botao.addEventListener("click", () => {
       const criarInput = document.createElement("input");
       criarInput.type = "file";
-      criarInput.accept = "image/*";
+      criarInput.accept = "image/*, application/pdf";
       criarInput.setAttribute("multiple", "");
 
       criarInput.addEventListener("change", async (event) => {
@@ -161,31 +167,57 @@
             srcLixeira.setAttribute("src", "../img/ico_lixeira.png");
             lixeira.appendChild(srcLixeira);
 
-            let arquivo_layout = document.createElement("img");
-            arquivo_layout.classList.add("arquivo_layout");
-            arquivo_layout.src = arquivoURL;
-            img_lixeira.appendChild(arquivo_layout);
+            if (arquivo.type === "application/pdf") {
+              const canvas = document.createElement("canvas");
+              const context = canvas.getContext("2d");
+              canvas.classList.add("arquivo_layout");
+              img_lixeira.appendChild(canvas);
 
-            arquivo_layout.onload = () => {
+              const pdf = await pdfjsLib.getDocument(arquivoURL).promise;
+              const page = await pdf.getPage(1); //renderiza a primeira pagina do PDF
+              const viewport = page.getViewport({ scale: 1 });
+
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+
+              page
+                .render({ canvasContext: context, viewport })
+                .promise.then(() => {
+                  console.log("PDF renderizado");
+                });
+              gerarCotas(canvas.width, canvas.height);
+            } else if (arquivo.type.startsWith("image/")) {
+              let arquivo_layout = document.createElement("img");
+              arquivo_layout.classList.add("arquivo_layout");
+              arquivo_layout.src = arquivoURL;
+              img_lixeira.appendChild(arquivo_layout);
+
+              arquivo_layout.onload = () => {
+                gerarCotas(
+                  arquivo_layout.naturalWidth,
+                  arquivo_layout.naturalHeight
+                );
+              };
+            }
+
+            function gerarCotas(largura, altura) {
               const PPI = 100; //Pixel por polegada (padrão por tela)
               const polegadasParaMM = 35.278; //1 polegada = 2,54cm
 
-              const larguraMM =
-                (arquivo_layout.naturalWidth / PPI) * polegadasParaMM;
-              const alturaMM =
-                (arquivo_layout.naturalHeight / PPI) * polegadasParaMM;
+              const larguraMM = (largura / PPI) * polegadasParaMM;
+              const alturaMM = (altura / PPI) * polegadasParaMM;
 
               cotaAltura.innerText = alturaMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
               cotaLargura.innerText = larguraMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
 
               console.log(`largura: ${larguraMM}
-              altura: ${alturaMM}`);
+                altura: ${alturaMM}`);
 
               // Adicionando funcionalidade para excluir a ramificação
               srcLixeira.addEventListener("click", () => {
                 container_img.remove(); // Remove a div pai da lixeira
               });
-            };
+            }
           }
         }
       });
