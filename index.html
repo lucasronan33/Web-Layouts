@@ -8,145 +8,156 @@
   </head>
 
   <body>
-    <form action="" method="post" class="corpo">
-      <div class="nav_bar">
-        <div class="tipo_impressao">
-          <label for="slct_tipo_impressao" id="label_slct_tipo_impressao"
-            >IMPRESSÃO</label
-          >
-          <select name="slct_tipo_impressao" id="slct_tipo_impressao">
-            <option value="uv">UV</option>
-            <option value="adesivo">ADESIVO</option>
-            <option value="recorte">RECORTE</option>
-            <option value="tecido">TECIDO</option>
-            <option value="lona">LONA</option>
+    <div class="corpo">
+      <form action="" method="post">
+        <div class="nav_bar">
+          <div class="tipo_impressao">
+            <label for="slct_tipo_impressao" id="label_slct_tipo_impressao"
+              >IMPRESSÃO</label
+            >
+            <select name="slct_tipo_impressao" id="slct_tipo_impressao">
+              <option value="uv">UV</option>
+              <option value="adesivo">ADESIVO</option>
+              <option value="recorte">RECORTE</option>
+              <option value="tecido">TECIDO</option>
+              <option value="lona">LONA</option>
+            </select>
+          </div>
+
+          <div class="informacoes_layout">
+            <div class="estilo_botao d_final">
+              <label for="dim_final">Dimensão Final (L x A)</label>
+              <input type="text" name="dim_final" placeholder="---" />
+            </div>
+            <div class="estilo_botao sangra">
+              <label for="sangra">Sangra Total (L x A)</label>
+              <input type="text" name="sangra" placeholder="---" />
+            </div>
+            <div class="estilo_botao material">
+              <label for="material">Material</label>
+              <input type="text" name="material" placeholder="---" />
+            </div>
+            <div class="estilo_botao quantidade">
+              <label for="quantidade">Quantidade</label>
+
+              <div class="grupo_quantidade">
+                <input type="text" name="quantidade" placeholder="---" />
+                <select name="slct_quantidade" id="slct_quantidade">
+                  <option value="un">un.</option>
+                  <option value="x_cada">x de cada</option>
+                </select>
+              </div>
+            </div>
+            <div class="estilo_botao impressao">
+              <label for="impressao">Impressão</label>
+              <select name="impressao" id="slct_impressao">
+                <option value="normal">Normal</option>
+                <option value="invertida">Invertida</option>
+              </select>
+            </div>
+            <div class="estilo_botao cores">
+              <label for="cores">Cores</label>
+              <select name="cores" id="slct_cores">
+                <option value="sem">---</option>
+                <option value="1x0">1x0</option>
+                <option value="4x0">4x0</option>
+                <option value="5x0">5x0</option>
+              </select>
+            </div>
+            <div class="estilo_botao calco">
+              <label for="calco">Calço</label>
+              <select name="calco" id="slct_calco">
+                <option value="sem">---</option>
+                <option value="branco_total">Branco Total</option>
+                <option value="branco_lcoalizado">Branco Localizado</option>
+              </select>
+            </div>
+            <div class="estilo_botao corte">
+              <label for="corte">Corte</label>
+              <select name="corte" id="slct_corte">
+                <option value="sem">---</option>
+                <option value="especial">Especial</option>
+                <option value="reto">Reto</option>
+              </select>
+            </div>
+            <div class="estilo_botao acabamento">
+              <label for="acabamento">Acabamento</label>
+              <input type="text" name="acabamento" placeholder="---" />
+            </div>
+            <div class="estilo_botao bainha">
+              <label for="bainha">Bainha</label>
+              <select name="bainha" id="slct_bainha">
+                <option value="sem">---</option>
+                <option value="simples">Simples</option>
+                <option value="dupla">Dupla</option>
+                <option value="tripla">Tripla + cordinha</option>
+              </select>
+            </div>
+            <div class="estilo_botao mascara">
+              <label for="mascara">Máscara</label>
+              <select name="mascara" id="slct_mascara">
+                <option value="sem">---</option>
+                <option value="papel">Papel</option>
+                <option value="transparente">Transparente</option>
+              </select>
+            </div>
+            <div class="estilo_botao laminacao">
+              <label for="laminacao">Laminação</label>
+              <input type="text" name="laminacao" placeholder="---" />
+            </div>
+          </div>
+
+          <div class="estilo_botao info_adicional">
+            <label for="info_adicional">Inf. adicionais</label>
+            <textarea
+              name="info_adicional"
+              id="input_info_adicional"
+              placeholder="---"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="nmr_OS">
+          <label for="input_nmr_os">OS: </label>
+          <input type="text" name="input_nmr_os" placeholder="-----" />
+        </div>
+
+        <div class="layout_area_1"></div>
+
+        <div class="logo"></div>
+
+        <div class="layout_area_2" id="corpoLayout"></div>
+
+        <div class="layout_area_3"></div>
+
+        <div class="nome_arte">
+          <label for="slct_nome_arte">Arte Final:</label>
+          <select name="slct_nome_arte" id="slct_nome_arte">
+            <option value="Lucas Torres">Lucas Torres</option>
+            <option value="Gabriel">Gabriel</option>
           </select>
         </div>
 
-        <div class="informacoes_layout">
-          <div class="estilo_botao d_final">
-            <label for="dim_final">Dimensão Final (L x A)</label>
-            <input type="text" name="dim_final" placeholder="---" />
-          </div>
-          <div class="estilo_botao sangra">
-            <label for="sangra">Sangra Total (L x A)</label>
-            <input type="text" name="sangra" placeholder="---" />
-          </div>
-          <div class="estilo_botao material">
-            <label for="material">Material</label>
-            <input type="text" name="material" placeholder="---" />
-          </div>
-          <div class="estilo_botao quantidade">
-            <label for="quantidade">Quantidade</label>
-
-            <div class="grupo_quantidade">
-              <input type="text" name="quantidade" placeholder="---" />
-              <select name="slct_quantidade" id="slct_quantidade">
-                <option value="un">un.</option>
-                <option value="x_cada">x de cada</option>
-              </select>
-            </div>
-          </div>
-          <div class="estilo_botao impressao">
-            <label for="impressao">Impressão</label>
-            <select name="impressao" id="slct_impressao">
-              <option value="normal">Normal</option>
-              <option value="invertida">Invertida</option>
-            </select>
-          </div>
-          <div class="estilo_botao cores">
-            <label for="cores">Cores</label>
-            <select name="cores" id="slct_cores">
-              <option value="sem">---</option>
-              <option value="1x0">1x0</option>
-              <option value="4x0">4x0</option>
-              <option value="5x0">5x0</option>
-            </select>
-          </div>
-          <div class="estilo_botao calco">
-            <label for="calco">Calço</label>
-            <select name="calco" id="slct_calco">
-              <option value="sem">---</option>
-              <option value="branco_total">Branco Total</option>
-              <option value="branco_lcoalizado">Branco Localizado</option>
-            </select>
-          </div>
-          <div class="estilo_botao corte">
-            <label for="corte">Corte</label>
-            <select name="corte" id="slct_corte">
-              <option value="sem">---</option>
-              <option value="especial">Especial</option>
-              <option value="reto">Reto</option>
-            </select>
-          </div>
-          <div class="estilo_botao acabamento">
-            <label for="acabamento">Acabamento</label>
-            <input type="text" name="acabamento" placeholder="---" />
-          </div>
-          <div class="estilo_botao bainha">
-            <label for="bainha">Bainha</label>
-            <select name="bainha" id="slct_bainha">
-              <option value="sem">---</option>
-              <option value="simples">Simples</option>
-              <option value="dupla">Dupla</option>
-              <option value="tripla">Tripla + cordinha</option>
-            </select>
-          </div>
-          <div class="estilo_botao mascara">
-            <label for="mascara">Máscara</label>
-            <select name="mascara" id="slct_mascara">
-              <option value="sem">---</option>
-              <option value="papel">Papel</option>
-              <option value="transparente">Transparente</option>
-            </select>
-          </div>
-          <div class="estilo_botao laminacao">
-            <label for="laminacao">Laminação</label>
-            <input type="text" name="laminacao" placeholder="---" />
-          </div>
+        <div id="nome_caminho">
+          <label for="input_nome_caminho" id="lblCaminho"
+            >Local do Arquivo:
+          </label>
+          <input
+            type="text"
+            name="input_nome_caminho"
+            placeholder="----------"
+          />
         </div>
 
-        <div class="estilo_botao info_adicional">
-          <label for="info_adicional">Inf. adicionais</label>
-          <textarea
-            name="info_adicional"
-            id="input_info_adicional"
-            placeholder="---"
-          ></textarea>
-        </div>
-      </div>
+        <div class="nav_bar_dir"></div>
+      </form>
 
-      <div class="nmr_OS">
-        <label for="input_nmr_os">OS: </label>
-        <input type="text" name="input_nmr_os" placeholder="-----" />
-      </div>
-
-      <div class="layout_area_1"></div>
-
-      <div class="logo"></div>
-
-      <div class="layout_area_2" id="corpoLayout"></div>
-
-      <div class="layout_area_3"></div>
-
-      <div class="nome_arte">
-        <label for="slct_nome_arte">Arte Final:</label>
-        <select name="slct_nome_arte" id="slct_nome_arte">
-          <option value="Lucas Torres">Lucas Torres</option>
-          <option value="Gabriel">Gabriel</option>
-        </select>
-      </div>
-
-      <div id="nome_caminho">
-        <label for="input_nome_caminho">Local do Arquivo: </label>
-        <input type="text" name="input_nome_caminho" placeholder="----------" />
-      </div>
-
-      <div class="nav_bar_dir"></div>
-    </form>
-
+      <button id="btnSaveAsPNG">Salvar PNG</button>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="./src/script.js"></script>
     <script src="./src/inserirArquivos.js"></script>
+    <script src="./src/baixarPng.js"></script>
   </body>
 </html>

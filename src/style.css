@@ -19,464 +19,479 @@
 }
 
 body {
-  form.corpo {
-    width: var(--largura_fundo);
-    height: var(--altura_fundo);
-    margin: 0 auto;
-    display: grid;
-    align-items: start;
-    justify-items: start;
+  .corpo {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
 
-    grid-template-areas:
-      "nav_bar nmr_os layout_area_1 logo nav_bar_dir"
-      "nav_bar layout_area_2 layout_area_2 layout_area_2 nav_bar_dir"
-      "nav_bar layout_area_3 layout_area_3 nome_arte nav_bar_dir"
-      "nav_bar nome_caminho nome_caminho nome_caminho nav_bar_dir";
+    form {
+      width: var(--largura_fundo);
+      height: var(--altura_fundo);
+      background-color: #ffffff;
+      margin: 0 auto;
+      display: grid;
+      align-items: start;
+      justify-items: start;
 
-    /*iamgem de gabarito*/
-    /* background-image: url(../img/gabarito_layout_uv.png); */
-    background-size: cover;
-    background-repeat: no-repeat;
+      grid-template-areas:
+        "nav_bar nmr_os layout_area_1 logo nav_bar_dir"
+        "nav_bar layout_area_2 layout_area_2 layout_area_2 nav_bar_dir"
+        "nav_bar layout_area_3 layout_area_3 nome_arte nav_bar_dir"
+        "nav_bar nome_caminho nome_caminho nome_caminho nav_bar_dir";
 
-    input {
-      border: none;
-    }
-
-    .nmr_OS,
-    .nome_arte,
-    #nome_caminho {
-      border-radius: 2.7204px;
-      overflow: hidden;
-      display: flex;
-
-      * {
-        font-size: 8px;
-        background-color: rgba(255, 255, 255, 0);
-        line-height: 18.21px;
-        color: var(--cor_fonte_1);
-      }
-
-      ::placeholder {
-        color: var(--cor_fonte_1);
-      }
-    }
-
-    .nav_bar {
-      width: 177.2654px;
-      height: 100%;
-      background-image: url(../img/fundo_nav_bar.png);
+      /*iamgem de gabarito*/
+      /* background-image: url(../img/gabarito_layout_uv.png); */
       background-size: cover;
-      margin: 0;
+      background-repeat: no-repeat;
 
-      grid-area: nav_bar;
-      display: flex;
-      flex-direction: column;
+      input {
+        border: none;
+      }
 
-      .tipo_impressao {
-        width: 161.7079px;
-        height: 60.4625px;
-        margin-top: 8.66px;
-        border-radius: 6.1946px;
-        background-color: rgba(255, 255, 255, 0.43);
+      .nmr_OS,
+      .nome_arte,
+      #nome_caminho {
+        border-radius: 2.7204px;
+        overflow: hidden;
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
 
         * {
-          width: 100%;
+          font-size: 8px;
           background-color: rgba(255, 255, 255, 0);
-          font-size: 20px;
-          color: white;
-          text-align: center;
+          line-height: 18.21px;
+          color: var(--cor_fonte_1);
         }
 
-        select {
-          /* height: 100%; */
-          line-height: 18.21px;
-          appearance: none;
-          border: none;
-          display: flex;
-
-          align-items: center;
-
-          option {
-            color: #5E4F9C;
-          }
+        ::placeholder {
+          color: var(--cor_fonte_1);
         }
       }
 
-      .estilo_botao {
-        width: 161.7079px;
-        height: 38.3517px;
-        margin-top: 11.62px;
-        background-color: rgba(255, 255, 255, 0.23);
-        color: var(--cor_fonte_1);
-        font-size: 12px;
-        text-align: center;
+      .nav_bar {
+        width: 177.2654px;
+        height: 100%;
+        background-image: url(../img/fundo_nav_bar.png);
+        background-size: cover;
+        margin: 0;
+
+        grid-area: nav_bar;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        overflow: hidden;
-        border-radius: 4.93px;
 
-        label {
-          width: 100%;
-          height: 50%;
-          background-color: rgba(255, 255, 255, 0.19);
+        .tipo_impressao {
+          width: 161.7079px;
+          height: 60.4625px;
+          margin-top: 8.66px;
+          border-radius: 6.1946px;
+          background-color: rgba(255, 255, 255, 0.43);
           display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        input::placeholder {
-          color: var(--cor_fonte_2);
-        }
-
-        :not(label) {
-          width: 100%;
-          height: 50%;
-          background-color: rgba(255, 255, 255, 0);
-          color: var(--cor_fonte_2);
-          text-align: center;
-        }
-
-        select {
-          appearance: none;
-          border: none;
-          display: flex;
-
-          align-items: center;
-
-          option {
-            color: #5E4F9C;
-          }
-        }
-
-        .grupo_quantidade {
-          display: flex;
-          height: 50%;
+          flex-direction: column;
+          justify-content: space-evenly;
 
           * {
-            height: 100%;
-          }
-
-          input {
-            width: 49%;
-            text-align: right;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0);
+            font-size: 20px;
+            color: white;
+            text-align: center;
           }
 
           select {
-            width: 49%;
+            /* height: 100%; */
+            line-height: 18.21px;
+            appearance: none;
+            border: none;
+            display: flex;
+
+            align-items: center;
 
             option {
-              text-align: left;
+              color: #5E4F9C;
+            }
+          }
+        }
+
+        .estilo_botao {
+          width: 161.7079px;
+          height: 38.3517px;
+          margin-top: 11.62px;
+          background-color: rgba(255, 255, 255, 0.23);
+          color: var(--cor_fonte_1);
+          font-size: 12px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          overflow: hidden;
+          border-radius: 4.93px;
+
+          label {
+            width: 100%;
+            height: 50%;
+            background-color: rgba(255, 255, 255, 0.19);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          input::placeholder {
+            color: var(--cor_fonte_2);
+          }
+
+          :not(label) {
+            width: 100%;
+            height: 50%;
+            background-color: rgba(255, 255, 255, 0);
+            color: var(--cor_fonte_2);
+            text-align: center;
+          }
+
+          select {
+            appearance: none;
+            border: none;
+            display: flex;
+
+            align-items: center;
+
+            option {
+              color: #5E4F9C;
             }
           }
 
-        }
-      }
-
-      .informacoes_layout {
-        display: grid;
-        grid-template-areas:
-          'dimFinal'
-          'sangra'
-          'material'
-          'quantidade'
-          'impressao'
-          'cores'
-          'calco'
-          'corte'
-          'acabamento';
-
-        .bainha,
-        .mascara,
-        .laminacao {
-          display: none;
-        }
-
-        .d_final {
-          margin-top: 18.85px;
-          grid-area: dimFinal;
-        }
-
-        .sangra {
-          grid-area: sangra;
-        }
-
-        .material {
-          grid-area: material;
-        }
-
-        .quantidade {
-          grid-area: quantidade;
-
           .grupo_quantidade {
             display: flex;
+            height: 50%;
+
+            * {
+              height: 100%;
+            }
 
             input {
-              width: 25%;
-              height: 100%;
-              margin-inline: auto 1px;
+              width: 49%;
               text-align: right;
             }
 
             select {
-              width: auto;
-              height: 100%;
-              display: flex;
-              margin-inline: 0px auto;
+              width: 49%;
 
               option {
                 text-align: left;
               }
             }
+
           }
         }
 
-        .impressao {
-          grid-area: impressao;
-        }
+        .informacoes_layout {
+          display: grid;
+          grid-template-areas:
+            'dimFinal'
+            'sangra'
+            'material'
+            'quantidade'
+            'impressao'
+            'cores'
+            'calco'
+            'corte'
+            'acabamento';
 
-        .cores {
-          grid-area: cores;
-        }
-
-        .calco {
-          grid-area: calco;
-        }
-
-        .corte {
-          grid-area: corte;
-        }
-
-        .acabamento {
-          grid-area: acabamento;
-        }
-
-        .bainha {
-          grid-area: bainha;
-        }
-
-        .mascara {
-          grid-area: mascara;
-        }
-
-        .laminacao {
-          grid-area: laminacao;
-        }
-      }
-
-      .info_adicional {
-        height: 54.76px;
-        margin-block: auto 2.7762px;
-
-        label {
-          height: 33.333%;
-          color: var(--cor_fonte_1);
-        }
-
-        #input_info_adicional {
-          width: 100%;
-          height: 66.666%;
-          display: flex;
-          resize: none;
-          border: none;
-        }
-
-        ::placeholder {
-          color: var(--cor_fonte_2);
-        }
-      }
-
-    }
-
-    .nmr_OS {
-      width: 111.7173px;
-      height: 17.4086px;
-      background-image: url(../img/fundo_nmr_os.png);
-      background-size: cover;
-      margin: var(--margin_topo) 0px 0px 2.7436px;
-      grid-area: nmr_os;
-
-      display: flex;
-
-      label {
-        width: auto;
-        margin-left: 7px;
-      }
-
-      input {
-        width: 100%;
-        height: 100%;
-        border: none;
-        margin-left: 2.94px;
-      }
-    }
-
-    .layout_area_1 {
-      width: 425.5133px;
-      height: 35.1412px;
-      grid-area: layout_area_1;
-    }
-
-    .logo {
-      width: 108.7112px;
-      height: 26.9729px;
-      margin: var(--margin_topo) 5.1526px 0px 0px;
-
-      background-image: url(../img/logo_showmais.png);
-      background-size: cover;
-      grid-area: logo;
-    }
-
-    .layout_area_2 {
-      width: 656.2407px;
-      height: 520.6525px;
-      grid-area: layout_area_2;
-
-      overflow: hidden;
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 5px;
-      justify-content: center;
-      align-items: center;
-
-      .container-img {
-        width: 90%;
-        height: auto;
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-template-rows: auto 1fr;
-        grid-template-areas:
-          ". largura"
-          "altura img-lixeira";
-        justify-content: center;
-        justify-items: center;
-        align-items: center;
-        color: cornflowerblue;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 12pt;
-
-        .altura {
-          height: 100%;
-          /* invertendo os sentidos */
-          transform: rotate(180deg);
-          border-left: 2px solid cornflowerblue;
-          grid-area: altura;
-          writing-mode: vertical-lr;
-          text-align: center;
-        }
-
-        .largura {
-          width: 100%;
-          border-bottom: 2px solid cornflowerblue;
-          grid-area: largura;
-          text-align: center;
-        }
-
-        .img-lixeira {
-          position: relative;
-          grid-area: img-lixeira;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          .arquivo_layout {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: block;
-          }
-
-          .lixeira {
+          .bainha,
+          .mascara,
+          .laminacao {
             display: none;
           }
+
+          .d_final {
+            margin-top: 18.85px;
+            grid-area: dimFinal;
+          }
+
+          .sangra {
+            grid-area: sangra;
+          }
+
+          .material {
+            grid-area: material;
+          }
+
+          .quantidade {
+            grid-area: quantidade;
+
+            .grupo_quantidade {
+              display: flex;
+
+              input {
+                width: 25%;
+                height: 100%;
+                margin-inline: auto 1px;
+                text-align: right;
+              }
+
+              select {
+                width: auto;
+                height: 100%;
+                display: flex;
+                margin-inline: 0px auto;
+
+                option {
+                  text-align: left;
+                }
+              }
+            }
+          }
+
+          .impressao {
+            grid-area: impressao;
+          }
+
+          .cores {
+            grid-area: cores;
+          }
+
+          .calco {
+            grid-area: calco;
+          }
+
+          .corte {
+            grid-area: corte;
+          }
+
+          .acabamento {
+            grid-area: acabamento;
+          }
+
+          .bainha {
+            grid-area: bainha;
+          }
+
+          .mascara {
+            grid-area: mascara;
+          }
+
+          .laminacao {
+            grid-area: laminacao;
+          }
         }
 
-        .img-lixeira:hover {
-          .lixeira {
-            display: flex;
+        .info_adicional {
+          height: 54.76px;
+          margin-block: auto 2.7762px;
 
+          label {
+            height: 33.333%;
+            color: var(--cor_fonte_1);
+          }
+
+          #input_info_adicional {
             width: 100%;
+            height: 66.666%;
+            display: flex;
+            resize: none;
+            border: none;
+          }
+
+          ::placeholder {
+            color: var(--cor_fonte_2);
+          }
+        }
+
+      }
+
+      .nmr_OS {
+        width: 111.7173px;
+        height: 17.4086px;
+        background-image: url(../img/fundo_nmr_os.png);
+        background-size: cover;
+        margin: var(--margin_topo) 0px 0px 2.7436px;
+        grid-area: nmr_os;
+
+        display: flex;
+
+        label {
+          width: auto;
+          margin-left: 7px;
+        }
+
+        input {
+          width: 100%;
+          height: 100%;
+          border: none;
+          margin-left: 2.94px;
+        }
+      }
+
+      .layout_area_1 {
+        width: 425.5133px;
+        height: 35.1412px;
+        grid-area: layout_area_1;
+      }
+
+      .logo {
+        width: 108.7112px;
+        height: 26.9729px;
+        margin: var(--margin_topo) 5.1526px 0px 0px;
+
+        background-image: url(../img/logo_showmais.png);
+        background-size: cover;
+        grid-area: logo;
+      }
+
+      .layout_area_2 {
+        width: 656.2407px;
+        height: 520.6525px;
+        grid-area: layout_area_2;
+
+        overflow: hidden;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+
+        .container-img {
+          width: 90%;
+          height: auto;
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-template-rows: auto 1fr;
+          grid-template-areas:
+            ". largura"
+            "altura img-lixeira";
+          justify-content: center;
+          justify-items: center;
+          align-items: center;
+          color: cornflowerblue;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 12pt;
+
+          .altura {
             height: 100%;
-            position: absolute;
-            background-color: #96969671;
-            background-size: 100%;
+            /* invertendo os sentidos */
+            transform: rotate(180deg);
+            border-left: 2px solid cornflowerblue;
+            grid-area: altura;
+            writing-mode: vertical-lr;
+            text-align: center;
+          }
+
+          .largura {
+            width: 100%;
+            border-bottom: 2px solid cornflowerblue;
+            grid-area: largura;
+            text-align: center;
+          }
+
+          .img-lixeira {
+            position: relative;
+            grid-area: img-lixeira;
+            display: flex;
             align-items: center;
             justify-content: center;
 
-            img {
-              height: 50%;
+            .arquivo_layout {
+              max-width: 100%;
+              max-height: 100%;
               object-fit: contain;
-              position: absolute;
+              display: block;
             }
 
-            img:hover {
-              cursor: pointer;
+            .lixeira {
+              display: none;
+            }
+          }
+
+          .img-lixeira:hover {
+            .lixeira {
+              display: flex;
+
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              background-color: #96969671;
+              background-size: 100%;
+              align-items: center;
+              justify-content: center;
+
+              img {
+                height: 50%;
+                object-fit: contain;
+                position: absolute;
+              }
+
+              img:hover {
+                cursor: pointer;
+              }
             }
           }
         }
       }
-    }
 
-    .layout_area_3 {
-      width: 539.9742px;
-      height: 18.6438px;
-      grid-area: layout_area_3;
-      margin: 0px;
-    }
-
-    .nav_bar_dir {
-      width: 8.6596px;
-      height: 595.2756px;
-      background-image: url(../img/fundo_nav_bar_dir.png);
-      background-size: cover;
-      grid-area: nav_bar_dir;
-    }
-
-    .nome_arte {
-      width: 111.7173px;
-      height: 17.4086px;
-      background-image: url(../img/fundo_nome_arte.png);
-      background-size: cover;
-      background-clip: content-box;
-
-      grid-area: nome_arte;
-      margin: 0px 4.5491px 0px 0px;
-
-      label {
-        margin-left: 7px;
+      .layout_area_3 {
+        width: 539.9742px;
+        height: 18.6438px;
+        grid-area: layout_area_3;
+        margin: 0px;
       }
 
-      select {
-        width: 58px;
-        appearance: none;
-        border: none;
-      }
-    }
-
-    #nome_caminho {
-      width: 648.948px;
-      height: 17.4086px;
-      background-image: url(../img/fundo_nome_caminho.png);
-      background-size: cover;
-      grid-area: nome_caminho;
-      margin: 0px 0px 2.7436px 3.2211px;
-
-      label {
-        width: 72.294px;
-        height: 100%;
-        margin-left: 4.05px;
-        color: white;
+      .nav_bar_dir {
+        width: 8.6596px;
+        height: 595.2756px;
+        background-image: url(../img/fundo_nav_bar_dir.png);
+        background-size: cover;
+        grid-area: nav_bar_dir;
       }
 
-      input {
-        width: 88%;
-        height: 100%;
-        border: none;
+      .nome_arte {
+        width: 111.7173px;
+        height: 17.4086px;
+        background-image: url(../img/fundo_nome_arte.png);
+        background-size: cover;
+        background-clip: content-box;
+
+        grid-area: nome_arte;
+        margin: 0px 4.5491px 0px 0px;
+
+        label {
+          margin-left: 7px;
+        }
+
+        select {
+          width: 58px;
+          appearance: none;
+          border: none;
+        }
+      }
+
+      #nome_caminho {
+        width: 648.948px;
+        height: 17.4086px;
+        background-image: url(../img/fundo_nome_caminho.png);
+        background-size: cover;
+        grid-area: nome_caminho;
+        margin: 0px 0px 2.7436px 3.2211px;
+
+        label#lblCaminho {
+          width: 72.294px;
+          height: 100%;
+          margin-left: 4.05px;
+          color: white;
+        }
+
+        label#lblCaminho:hover {
+          cursor: pointer;
+        }
+
+        input {
+          width: 88%;
+          height: 100%;
+          border: none;
+        }
       }
     }
   }
+
+
 }

@@ -1,5 +1,5 @@
 const corpo = document.getElementById("corpoLayout");
-const botao = document.getElementById("nome_caminho");
+const botao = document.getElementById("lblCaminho");
 
 // Configuração do caminho para o worker
 pdfjsLib.GlobalWorkerOptions.workerSrc =
