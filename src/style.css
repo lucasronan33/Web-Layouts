@@ -44,7 +44,7 @@ body {
 
     .nmr_OS,
     .nome_arte,
-    .nome_caminho {
+    #nome_caminho {
       border-radius: 2.7204px;
       overflow: hidden;
       display: flex;
@@ -55,9 +55,10 @@ body {
         line-height: 18.21px;
         color: var(--cor_fonte_1);
       }
-      ::placeholder{
-          color: var(--cor_fonte_1);
-        }
+
+      ::placeholder {
+        color: var(--cor_fonte_1);
+      }
     }
 
     .nav_bar {
@@ -98,7 +99,7 @@ body {
 
           align-items: center;
 
-          option{
+          option {
             color: #5E4F9C;
           }
         }
@@ -108,7 +109,7 @@ body {
         width: 161.7079px;
         height: 38.3517px;
         margin-top: 11.62px;
-        background-color: rgba(255, 255, 255, 0.23); 
+        background-color: rgba(255, 255, 255, 0.23);
         color: var(--cor_fonte_1);
         font-size: 12px;
         text-align: center;
@@ -121,12 +122,13 @@ body {
         label {
           width: 100%;
           height: 50%;
-          background-color: rgba(255, 255, 255, 0.19); 
+          background-color: rgba(255, 255, 255, 0.19);
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        input::placeholder{
+
+        input::placeholder {
           color: var(--cor_fonte_2);
         }
 
@@ -145,7 +147,7 @@ body {
 
           align-items: center;
 
-          option{
+          option {
             color: #5E4F9C;
           }
         }
@@ -209,21 +211,23 @@ body {
         .quantidade {
           grid-area: quantidade;
 
-          .grupo_quantidade{
+          .grupo_quantidade {
             display: flex;
 
-            input{
+            input {
               width: 25%;
               height: 100%;
               margin-inline: auto 1px;
               text-align: right;
             }
-            select{
+
+            select {
               width: auto;
               height: 100%;
               display: flex;
-              margin-inline: 0px auto;  
-              option{
+              margin-inline: 0px auto;
+
+              option {
                 text-align: left;
               }
             }
@@ -279,7 +283,8 @@ body {
           resize: none;
           border: none;
         }
-        ::placeholder{
+
+        ::placeholder {
           color: var(--cor_fonte_2);
         }
       }
@@ -289,8 +294,8 @@ body {
     .nmr_OS {
       width: 111.7173px;
       height: 17.4086px;
-            background-image: url(../img/fundo_nmr_os.png);
-            background-size: cover;
+      background-image: url(../img/fundo_nmr_os.png);
+      background-size: cover;
       margin: var(--margin_topo) 0px 0px 2.7436px;
       grid-area: nmr_os;
 
@@ -329,6 +334,91 @@ body {
       width: 656.2407px;
       height: 520.6525px;
       grid-area: layout_area_2;
+
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 5px;
+      justify-content: center;
+      align-items: center;
+
+      .container-img {
+        width: 90%;
+        height: auto;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+          ". largura"
+          "altura img-lixeira";
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        color: cornflowerblue;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12pt;
+
+        .altura {
+          height: 100%;
+          /* invertendo os sentidos */
+          transform: rotate(180deg);
+          border-left: 2px solid cornflowerblue;
+          grid-area: altura;
+          writing-mode: vertical-lr;
+          text-align: center;
+        }
+
+        .largura {
+          width: 100%;
+          border-bottom: 2px solid cornflowerblue;
+          grid-area: largura;
+          text-align: center;
+        }
+
+        .img-lixeira {
+          position: relative;
+          grid-area: img-lixeira;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .arquivo_layout {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+          }
+
+          .lixeira {
+            display: none;
+          }
+        }
+
+        .img-lixeira:hover {
+          .lixeira {
+            display: flex;
+
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: #96969671;
+            background-size: 100%;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              height: 50%;
+              object-fit: contain;
+              position: absolute;
+            }
+
+            img:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
 
     .layout_area_3 {
@@ -341,16 +431,16 @@ body {
     .nav_bar_dir {
       width: 8.6596px;
       height: 595.2756px;
-            background-image: url(../img/fundo_nav_bar_dir.png);
-            background-size: cover;
+      background-image: url(../img/fundo_nav_bar_dir.png);
+      background-size: cover;
       grid-area: nav_bar_dir;
     }
 
     .nome_arte {
       width: 111.7173px;
       height: 17.4086px;
-            background-image: url(../img/fundo_nome_arte.png);
-            background-size: cover;
+      background-image: url(../img/fundo_nome_arte.png);
+      background-size: cover;
       background-clip: content-box;
 
       grid-area: nome_arte;
@@ -367,11 +457,11 @@ body {
       }
     }
 
-    .nome_caminho {
+    #nome_caminho {
       width: 648.948px;
       height: 17.4086px;
-            background-image: url(../img/fundo_nome_caminho.png);
-            background-size: cover;
+      background-image: url(../img/fundo_nome_caminho.png);
+      background-size: cover;
       grid-area: nome_caminho;
       margin: 0px 0px 2.7436px 3.2211px;
 
