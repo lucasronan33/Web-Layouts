@@ -7,6 +7,22 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 estiloCorpo = corpo.style;
 
+function marcaDesmarcaCheckbox(elemento, checkbox) {
+
+    elemento.addEventListener('click', () => {
+        if (checkbox.checked) {
+            checkbox.checked = false
+            console.log('descheckado');
+
+        } else {
+            checkbox.checked = true
+            console.log('checkado');
+
+        }
+    })
+
+}
+
 function estruturaSelecao() {
 
     const selecaoPDF = document.createElement('div')
@@ -27,6 +43,8 @@ function estruturaSelecao() {
     btnInserirPaginas.id = "btnInserirPaginas";
     btnInserirPaginas.innerText = "Inserir";
     selecaoPDF.appendChild(btnInserirPaginas);
+
+    marcaDesmarcaCheckbox(divChkSelecionarTudo, chkSelecionarTudo)
 
 }
 
@@ -58,6 +76,8 @@ botao.addEventListener("click", () => {
                     const arquivoSelecao = document.createElement("div");
                     arquivoSelecao.classList.add("arquivoSelecao");
                     divArquivo.appendChild(arquivoSelecao);
+
+                    marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao)
 
                     return {
                         divArquivo,
