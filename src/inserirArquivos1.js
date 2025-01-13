@@ -12,11 +12,12 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
     elemento.addEventListener('click', () => {
         if (checkbox.checked) {
             checkbox.checked = false
-            console.log('descheckado');
+            console.log('desmarcado');
+
 
         } else {
             checkbox.checked = true
-            console.log('checkado');
+            console.log('marcado');
 
         }
     })
@@ -37,7 +38,9 @@ function estruturaSelecao() {
     const chkSelecionarTudo = document.createElement('input')
     chkSelecionarTudo.type = 'checkbox'
     chkSelecionarTudo.id = 'selecionarTudo'
-    divChkSelecionarTudo.append(chkSelecionarTudo, 'Selecionar tudo')
+    divChkSelecionarTudo.append(chkSelecionarTudo, `Desmarcar / Marcar
+        tudo`)
+    divChkSelecionarTudo.innerHTML += '<p>tudo</p>'
 
     const btnInserirPaginas = document.createElement("button");
     btnInserirPaginas.id = "btnInserirPaginas";

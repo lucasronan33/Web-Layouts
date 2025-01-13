@@ -504,13 +504,19 @@ body {
     row-gap: 3vh;
     color: var(--cor_fonte_2);
     background-color: var(--cor_fonte_1);
-    
-    input[type='checkbox']{
+
+    .chkSelecionarTudo{
+      text-align: center;
       cursor: pointer;
     }
 
+    input[type='checkbox']{
+      margin-right: 1vw;
+    }
+    
     .arquivo {
       color: var(--cor_fonte_2);
+      cursor: pointer;
 
       .arquivoSelecao {
         width: 300px;

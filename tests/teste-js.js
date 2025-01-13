@@ -12,16 +12,19 @@ checkboxSelecao.addEventListener('change', () => {
 
 const selecionarChk = document.querySelector('.arquivo')
 
-selecionarChk.addEventListener('click', () => {
-    if (checkboxSelecao.checked) {
-        checkboxSelecao.checked = false
-        console.log('descheckado');
+function marcaDesmarcaCheckbox(elemento, checkbox) {
 
-    } else {
-        checkboxSelecao.checked = true
-        console.log('checkado');
+    elemento.addEventListener('click', () => {
+        if (checkbox.checked) {
+            checkbox.checked = false
+            console.log('descheckado');
 
-    }
-})
+        } else {
+            checkbox.checked = true
+            console.log('checkado');
 
+        }
+    })
+
+}
 selecionarChk.style.cursor = 'pointer'
