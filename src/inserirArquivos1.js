@@ -20,8 +20,26 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
             console.log('marcado');
 
         }
+        return checkbox.checked
     })
 
+}
+function selecionarTodasCheckbox(checkboxPai, seletorCheckboxPai, checkboxFilho, seletorCheckboxFilho) {
+
+    checkboxPai = document.querySelector(seletorCheckboxPai)
+
+    checkboxFilho = document.getElementsByClassName(seletorCheckboxFilho)
+
+    if (checkboxPai.checked === true) {
+        for (const checkbox of checkboxFilho) {
+            checkbox.checked = true
+
+        }
+    } else {
+        for (const checkbox of checkboxFilho) {
+            checkbox.checked = false
+        }
+    }
 }
 
 function estruturaSelecao() {
@@ -33,14 +51,11 @@ function estruturaSelecao() {
     const divChkSelecionarTudo = document.createElement('div')
     divChkSelecionarTudo.classList.add('chkSelecionarTudo')
     selecaoPDF.appendChild(divChkSelecionarTudo)
-    // divChkSelecionarTudo.innerText = 'Selecionar tudo'
 
     const chkSelecionarTudo = document.createElement('input')
     chkSelecionarTudo.type = 'checkbox'
     chkSelecionarTudo.id = 'selecionarTudo'
-    divChkSelecionarTudo.append(chkSelecionarTudo, `Desmarcar / Marcar
-        tudo`)
-    divChkSelecionarTudo.innerHTML += '<p>tudo</p>'
+    divChkSelecionarTudo.append(chkSelecionarTudo, 'Desmarcar / Marcar tudo')
 
     const btnInserirPaginas = document.createElement("button");
     btnInserirPaginas.id = "btnInserirPaginas";
@@ -48,7 +63,6 @@ function estruturaSelecao() {
     selecaoPDF.appendChild(btnInserirPaginas);
 
     marcaDesmarcaCheckbox(divChkSelecionarTudo, chkSelecionarTudo)
-
 }
 
 botao.addEventListener("click", () => {
@@ -60,7 +74,12 @@ botao.addEventListener("click", () => {
     criarInput.addEventListener("change", async (event) => {
         const arquivos = event.target.files;
 
-        estruturaSelecao()
+        let selecaoPDF = document.querySelector('.selecaoPDF')
+
+        if (!selecaoPDF) {
+            estruturaSelecao()
+            selecaoPDF = document.querySelector('.selecaoPDF')
+        }
 
         for (const arquivo of arquivos) {
             if (arquivo) {
@@ -68,7 +87,6 @@ botao.addEventListener("click", () => {
                 function criarEstrutura(nmPagina) {
                     const divArquivo = document.createElement("div");
                     divArquivo.classList.add("arquivo");
-                    const selecaoPDF = document.querySelector('.selecaoPDF')
                     selecaoPDF.appendChild(divArquivo);
 
                     const chkArquivoSelecao = document.createElement('input');
@@ -79,6 +97,10 @@ botao.addEventListener("click", () => {
                     const arquivoSelecao = document.createElement("div");
                     arquivoSelecao.classList.add("arquivoSelecao");
                     divArquivo.appendChild(arquivoSelecao);
+
+                    const btnInserirPaginas = document.body.querySelector('#btnInserirPaginas')
+                    const pai = divArquivo.parentNode
+                    pai.insertBefore(divArquivo, btnInserirPaginas)
 
                     marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao)
 
@@ -124,9 +146,27 @@ botao.addEventListener("click", () => {
             }
         }
 
-        const selecaoPDF = document.querySelector('.selecaoPDF')
-        const btnInserirPaginas = document.querySelector('#btnInserirPaginas')
-        // selecaoPDF.lastChild(btnInserirPaginas)
+        let divCheckboxPai = document.querySelector('.chkSelecionarTudo')
+        let checkboxPai = document.querySelector('#selecionarTudo')
+
+        divCheckboxPai.addEventListener('click', () => {
+            let checkboxFilho = document.getElementsByClassName('chkArquivoSelecao')
+
+            if (checkboxPai.checked === true) {
+                for (let checkbox of checkboxFilho) {
+                    checkbox.checked = true
+
+                }
+            } else if (checkboxPai.checked === false) {
+                for (let checkbox of checkboxFilho) {
+                    checkbox.checked = false
+                    console.log('desmarcou todas');
+
+                }
+            }
+
+        })
     });
     criarInput.click();
+
 });
