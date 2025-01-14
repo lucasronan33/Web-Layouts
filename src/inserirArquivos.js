@@ -1,4 +1,4 @@
-const corpo = document.getElementById("corpoLayout");
+const corpo = document.getElementById("arquivo");
 const botao = document.getElementById("lblCaminho");
 
 // Configuração do caminho para o worker
