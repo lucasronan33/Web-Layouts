@@ -155,17 +155,15 @@ botao.addEventListener("click", () => {
             if (checkboxPai.checked === true) {
                 for (let checkbox of checkboxFilho) {
                     checkbox.checked = true
-
                 }
             } else if (checkboxPai.checked === false) {
                 for (let checkbox of checkboxFilho) {
                     checkbox.checked = false
-                    console.log('desmarcou todas');
-
                 }
             }
 
         })
+
     });
     criarInput.click();
 
