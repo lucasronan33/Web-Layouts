@@ -9,6 +9,28 @@ estiloCorpo = corpo.style;
 
 let numeroElemento = 0;
 
+function criarEstrutura2(nmPagina) {
+  const divArquivo = document.createElement("div");
+  divArquivo.classList.add("arquivo");
+  corpo.appendChild(divArquivo);
+
+  const chkArquivoSelecao = document.createElement("input");
+  chkArquivoSelecao.type = "checkbox";
+  chkArquivoSelecao.classList.add("chkArquivoSelecao");
+  divArquivo.appendChild(chkArquivoSelecao);
+
+  divArquivo.innerText = `Página ${nmPagina}`;
+
+  const arquivoSelecao = document.createElement("div");
+  arquivoSelecao.classList.add("arquivoSelecao");
+  divArquivo.appendChild(arquivoSelecao);
+
+  const btnInserirPaginas = document.createElement("button");
+  btnInserirPaginas.id = "btnInserirPaginas";
+  btnInserirPaginas.innerText = "Inserir";
+  divArquivo.appendChild(btnInserirPaginas);
+}
+
 botao.addEventListener("click", () => {
   const criarInput = document.createElement("input");
   criarInput.type = "file";

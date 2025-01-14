@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +13,7 @@
       <form action="" method="post">
         <div class="nav_bar">
           <div class="tipo_impressao">
-            <label for="slct_tipo_impressao" id="label_slct_tipo_impressao"
-              >IMPRESSÃO</label
-            >
+            <label for="slct_tipo_impressao" id="label_slct_tipo_impressao">IMPRESSÃO</label>
             <select name="slct_tipo_impressao" id="slct_tipo_impressao">
               <option value="uv">UV</option>
               <option value="adesivo">ADESIVO</option>
@@ -109,11 +108,7 @@
 
           <div class="estilo_botao info_adicional">
             <label for="info_adicional">Inf. adicionais</label>
-            <textarea
-              name="info_adicional"
-              id="input_info_adicional"
-              placeholder="---"
-            ></textarea>
+            <textarea name="info_adicional" id="input_info_adicional" placeholder="---"></textarea>
           </div>
         </div>
 
@@ -139,14 +134,9 @@
         </div>
 
         <div id="nome_caminho">
-          <label for="input_nome_caminho" id="lblCaminho"
-            >Local do Arquivo:
+          <label for="input_nome_caminho" id="lblCaminho">Local do Arquivo:
           </label>
-          <input
-            type="text"
-            name="input_nome_caminho"
-            placeholder="----------"
-          />
+          <input type="text" name="input_nome_caminho" placeholder="----------" />
         </div>
 
         <div class="nav_bar_dir"></div>
@@ -155,23 +145,27 @@
       <button id="btnSaveAsPNG">Salvar PNG</button>
     </div>
     <br>
-    <div class="selecaoPDF">
-      <div class="chkSelecionarTudo">
-        <input type="checkbox" name="selecionarTodas" id="selecionarTodas"> Selecionar tudo
-      </div>
-    
-      <div class="arquivo">
-        <input type="checkbox" name="chkArquivoSelecao" id="chkArquivoSelecao">
-        Página 1
-        <div class="arquivoSelecao" id="arquivo"></div>
-      </div>
-      <button id="btnInserirPaginas">Inserir</button>
 
-</div>
+    <!-- <div class="selecaoPDF">
+    <div class="chkSelecionarTudo">
+      <input type="checkbox" name="selecionarTodas" id="selecionarTudo"> 
+      Selecionar tudo
+    </div>
+
+    <div class="arquivo">
+      <input type="checkbox" name="chkArquivoSelecao" class="chkArquivoSelecao">
+      Página 1
+      <div class="arquivoSelecao"></div>
+    </div>
+    <button id="btnInserirPaginas">Inserir</button>
+  </div> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="./src/script.js"></script>
-    <script src="./src/inserirArquivos.js"></script>
+    <!-- <script src="./tests/teste-js.js"></script> -->
+    <script src="./src/inserirArquivos1.js"></script>
     <script src="./src/baixarPng.js"></script>
   </body>
+
 </html>
