@@ -14,32 +14,21 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
             checkbox.checked = false
             console.log('desmarcado');
 
+            let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
+            checkboxSelecionarTodas.checked = false
+            console.log('checkboxSelecionarTodas: desmarcou');
+
 
         } else {
             checkbox.checked = true
             console.log('marcado');
 
         }
+
+
         return checkbox.checked
     })
 
-}
-function selecionarTodasCheckbox(checkboxPai, seletorCheckboxPai, checkboxFilho, seletorCheckboxFilho) {
-
-    checkboxPai = document.querySelector(seletorCheckboxPai)
-
-    checkboxFilho = document.getElementsByClassName(seletorCheckboxFilho)
-
-    if (checkboxPai.checked === true) {
-        for (const checkbox of checkboxFilho) {
-            checkbox.checked = true
-
-        }
-    } else {
-        for (const checkbox of checkboxFilho) {
-            checkbox.checked = false
-        }
-    }
 }
 
 function estruturaSelecao() {
@@ -148,9 +137,9 @@ botao.addEventListener("click", () => {
 
         let divCheckboxPai = document.querySelector('.chkSelecionarTudo')
         let checkboxPai = document.querySelector('#selecionarTudo')
+        let checkboxFilho = document.getElementsByClassName('chkArquivoSelecao')
 
         divCheckboxPai.addEventListener('click', () => {
-            let checkboxFilho = document.getElementsByClassName('chkArquivoSelecao')
 
             if (checkboxPai.checked === true) {
                 for (let checkbox of checkboxFilho) {
