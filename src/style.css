@@ -512,6 +512,7 @@ body {
 
     input[type='checkbox']{
       margin-right: 1vw;
+      cursor: pointer;
     }
     
     .arquivo {

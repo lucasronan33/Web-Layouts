@@ -9,7 +9,7 @@ estiloCorpo = corpo.style;
 
 function marcaDesmarcaCheckbox(elemento, checkbox) {
     elemento.addEventListener('click', () => {
-        if (checkbox.checked) {
+        if (checkbox.checked === true) {
             checkbox.checked = false
             // console.log('desmarcado');
             let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
@@ -19,20 +19,31 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
             checkbox.checked = true
             // console.log('marcado');
         }
-        return checkbox.checked
+        document.dispatchEvent(new Event('checkboxAtualizado'))
     })
 }
 
 function marcarTodasCheckbox(checkboxPai, checkboxFilho) {
-    if (checkboxPai.checked === true) {
-        for (let checkbox of checkboxFilho) {
-            checkbox.checked = true
-        }
-    } else if (checkboxPai.checked === false) {
-        for (let checkbox of checkboxFilho) {
-            checkbox.checked = false
-        }
-    }
+    // if (checkboxPai.checked === true) {
+    //     for (let checkbox of checkboxFilho) {
+    //         checkbox.checked = true
+    //     }
+    // } else if (checkboxPai.checked === false) {
+    //     for (let checkbox of checkboxFilho) {
+    //         checkbox.checked = false
+    //     }
+    // }
+
+    // Chat GPT
+    let nodeListCheckbox = Array.from(checkboxFilho)
+    nodeListCheckbox.forEach(checkbox => {
+        checkbox.checked = checkboxPai.checked
+    })
+}
+
+function verificaCheckboxMarcada(checkboxFilho) {
+    const todosMarcados = Array.from(checkboxFilho).every(checkbox => checkbox.checked === true)
+    return todosMarcados
 }
 
 function estruturaSelecao() {
@@ -55,6 +66,7 @@ function estruturaSelecao() {
     selecaoPDF.appendChild(btnInserirPaginas);
 
     marcaDesmarcaCheckbox(divChkSelecionarTudo, chkSelecionarTudo)
+    marcaDesmarcaCheckbox(chkSelecionarTudo, chkSelecionarTudo)
 }
 
 botao.addEventListener("click", () => {
@@ -94,7 +106,9 @@ botao.addEventListener("click", () => {
                     const pai = divArquivo.parentNode
                     pai.insertBefore(divArquivo, btnInserirPaginas)//Insere o botão depois de todos as pagina (atualiza automaticamente)
 
+                    marcaDesmarcaCheckbox(chkArquivoSelecao, chkArquivoSelecao)
                     marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao)
+
 
                     return {
                         divArquivo,
@@ -141,19 +155,14 @@ botao.addEventListener("click", () => {
         let checkboxPai = document.querySelector('#selecionarTudo')
         let checkboxFilho = document.getElementsByClassName('chkArquivoSelecao')
 
-        divCheckboxPai.addEventListener('click', () => {
-
+        document.addEventListener('checkboxAtualizado', () => {
+            let todosMarcados = verificaCheckboxMarcada(checkboxFilho)
+            if (todosMarcados === true) {
+                checkboxPai.checked = true
+            }
+        })
+        divCheckboxPai.addEventListener(('click'), () => {
             marcarTodasCheckbox(checkboxPai, checkboxFilho)
-            // if (checkboxPai.checked === true) {
-            //     for (let checkbox of checkboxFilho) {
-            //         checkbox.checked = true
-            //     }
-            // } else if (checkboxPai.checked === false) {
-            //     for (let checkbox of checkboxFilho) {
-            //         checkbox.checked = false
-            //     }
-            // }
-
         })
 
     });
