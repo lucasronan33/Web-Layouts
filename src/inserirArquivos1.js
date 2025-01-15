@@ -8,31 +8,34 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 estiloCorpo = corpo.style;
 
 function marcaDesmarcaCheckbox(elemento, checkbox) {
-
     elemento.addEventListener('click', () => {
         if (checkbox.checked) {
             checkbox.checked = false
-            console.log('desmarcado');
-
+            // console.log('desmarcado');
             let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
             checkboxSelecionarTodas.checked = false
-            console.log('checkboxSelecionarTodas: desmarcou');
-
-
+            // console.log('checkboxSelecionarTodas: desmarcou');
         } else {
             checkbox.checked = true
-            console.log('marcado');
-
+            // console.log('marcado');
         }
-
-
         return checkbox.checked
     })
+}
 
+function marcarTodasCheckbox(checkboxPai, checkboxFilho) {
+    if (checkboxPai.checked === true) {
+        for (let checkbox of checkboxFilho) {
+            checkbox.checked = true
+        }
+    } else if (checkboxPai.checked === false) {
+        for (let checkbox of checkboxFilho) {
+            checkbox.checked = false
+        }
+    }
 }
 
 function estruturaSelecao() {
-
     const selecaoPDF = document.createElement('div')
     selecaoPDF.classList.add('selecaoPDF')
     document.body.appendChild(selecaoPDF)
@@ -89,7 +92,7 @@ botao.addEventListener("click", () => {
 
                     const btnInserirPaginas = document.body.querySelector('#btnInserirPaginas')
                     const pai = divArquivo.parentNode
-                    pai.insertBefore(divArquivo, btnInserirPaginas)
+                    pai.insertBefore(divArquivo, btnInserirPaginas)//Insere o botão depois de todos as pagina (atualiza automaticamente)
 
                     marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao)
 
@@ -109,7 +112,6 @@ botao.addEventListener("click", () => {
                             chkArquivoSelecao,
                             arquivoSelecao
                         } = criarEstrutura(i);
-
                     }
                 } else if (arquivo.type.startsWith("image/")) {
                     let arquivo_layout = document.createElement("img");
@@ -141,19 +143,19 @@ botao.addEventListener("click", () => {
 
         divCheckboxPai.addEventListener('click', () => {
 
-            if (checkboxPai.checked === true) {
-                for (let checkbox of checkboxFilho) {
-                    checkbox.checked = true
-                }
-            } else if (checkboxPai.checked === false) {
-                for (let checkbox of checkboxFilho) {
-                    checkbox.checked = false
-                }
-            }
+            marcarTodasCheckbox(checkboxPai, checkboxFilho)
+            // if (checkboxPai.checked === true) {
+            //     for (let checkbox of checkboxFilho) {
+            //         checkbox.checked = true
+            //     }
+            // } else if (checkboxPai.checked === false) {
+            //     for (let checkbox of checkboxFilho) {
+            //         checkbox.checked = false
+            //     }
+            // }
 
         })
 
     });
     criarInput.click();
-
 });
