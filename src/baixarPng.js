@@ -27,7 +27,7 @@ document.getElementById("btnSaveAsPNG").addEventListener("click", () => {
 
   // Força o reflow para garantir o estado visual atualizado
   elemento.offsetHeight
-  
+
   domtoimage
     .toPng(elemento, {
       width: elemento.offsetWidth * 2, // Redimensiona a largura para maior qualidade
@@ -38,7 +38,7 @@ document.getElementById("btnSaveAsPNG").addEventListener("click", () => {
       // Cria um link temporário para download
       const link = document.createElement("a");
       link.href = dataUrl;
-      link.download = "captura.png";
+      link.download = "---LAYOUT-.png";
 
       // Simula o clique no link para iniciar o download
       link.click();

@@ -493,6 +493,9 @@ body {
       }
     }
   }
+input:-webkit-autofill{
+  transition: background-color 0s 600000s, color 0s 600000s !important;
+}
 
   .selecaoPDF {
     padding: 3vh;
