@@ -58,15 +58,18 @@ function estruturaSelecao() {
     const chkSelecionarTudo = document.createElement('input')
     chkSelecionarTudo.type = 'checkbox'
     chkSelecionarTudo.id = 'selecionarTudo'
-    divChkSelecionarTudo.append(chkSelecionarTudo, 'Desmarcar / Marcar tudo')
+    chkSelecionarTudo.name = 'selecionarTudo'
+
+    const labelSelecionarTudo = document.createElement('label')
+    labelSelecionarTudo.setAttribute('for', 'selecionarTudo')
+    labelSelecionarTudo.textContent = 'Desmarcar / Marcar tudo'
+
+    divChkSelecionarTudo.append(chkSelecionarTudo, labelSelecionarTudo)
 
     const btnInserirPaginas = document.createElement("button");
     btnInserirPaginas.id = "btnInserirPaginas";
     btnInserirPaginas.innerText = "Inserir";
     selecaoPDF.appendChild(btnInserirPaginas);
-
-    marcaDesmarcaCheckbox(divChkSelecionarTudo, chkSelecionarTudo)
-    marcaDesmarcaCheckbox(chkSelecionarTudo, chkSelecionarTudo)
 }
 
 botao.addEventListener("click", () => {
@@ -95,8 +98,14 @@ botao.addEventListener("click", () => {
 
                     const chkArquivoSelecao = document.createElement('input');
                     chkArquivoSelecao.type = 'checkbox';
+                    chkArquivoSelecao.name = `checkbox-${nmPagina}`
                     chkArquivoSelecao.classList.add("chkArquivoSelecao");
-                    divArquivo.append(chkArquivoSelecao, `Página ${nmPagina}`)
+
+                    const label = document.createElement('label')
+                    label.setAttribute('for', `checkbox-${nmPagina}`)
+                    label.textContent = `Página ${nmPagina}`
+
+                    divArquivo.append(chkArquivoSelecao, label)
 
                     const arquivoSelecao = document.createElement("div");
                     arquivoSelecao.classList.add("arquivoSelecao");
