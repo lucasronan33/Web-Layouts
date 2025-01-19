@@ -15,9 +15,28 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
             let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
             checkboxSelecionarTodas.checked = false
             // console.log('checkboxSelecionarTodas: desmarcou');
+
+            const verificacaoCheckbox = document.querySelectorAll('.chkArquivoSelecao')
+            for (const input of verificacaoCheckbox) {
+                let divButtons = document.querySelectorAll('.divButtons')
+                for (const div of divButtons) {
+                    if (input.checked === true <= 0) {
+                        div.style.display = 'none'
+                    }
+                }
+            }
         } else {
             checkbox.checked = true
             // console.log('marcado');
+            const verificacaoCheckbox = document.querySelectorAll('.chkArquivoSelecao')
+            for (const input of verificacaoCheckbox) {
+                let divButtons = document.querySelectorAll('.divButtons')
+                for (const div of divButtons) {
+                    if (input.checked === true > 0) {
+                        div.style.display = 'flex'
+                    }
+                }
+            }
         }
         document.dispatchEvent(new Event('checkboxAtualizado'))
     })

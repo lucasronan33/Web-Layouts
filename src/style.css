@@ -526,9 +526,9 @@ body {
     }
 
     .divButtons{
-      display: flex;
       gap: 5vh;
       margin-top: -4vh;
+      display: none;
     }
 
     #box-arquivo{
@@ -551,6 +551,7 @@ body {
   }
   #box-arquivo+.divButtons{
     margin-top: 0;
+    display: none;
   }
     button {
       padding: 2vh 4vh;
