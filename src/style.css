@@ -493,7 +493,7 @@ body {
         }
       }
     }
-        button#btnSaveAsPNG {
+    button#btnSaveAsPNG {
       padding: 2vh 4vh;
       background-color: var(--cor_fonte_1);
       color: var(--cor_fonte_2);
@@ -501,7 +501,6 @@ body {
       border-radius: 1vh;
       cursor: pointer;
     }
-
   }
 
   input:-webkit-autofill {
@@ -519,11 +518,24 @@ body {
     color: var(--cor_fonte_2);
     background-color: var(--cor_fonte_1);
     border-radius: 3vh;
+    margin-bottom: 5vh;
 
     .chkSelecionarTudo {
       text-align: center;
       cursor: pointer;
     }
+
+    .divButtons{
+      display: flex;
+      gap: 5vh;
+      margin-top: -4vh;
+    }
+
+    #box-arquivo{
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 3vh;
+      row-gap: 5vh;
 
     .arquivo {
       color: var(--cor_fonte_2);
@@ -536,21 +548,27 @@ body {
         background-color: red;
       }
     }
-
-    button#btnInserirPaginas {
+  }
+  #box-arquivo+.divButtons{
+    margin-top: 0;
+  }
+    button {
       padding: 2vh 4vh;
       background-color: var(--cor_fonte_2);
       color: var(--cor_fonte_1);
       border: none;
       border-radius: 1vh;
       cursor: pointer;
-    }
+    }    
   }
 }
 
 /*ESTILIZAÇÃO CHECKBOX*/
 input[type="checkbox"] {
   display: none;
+}
+input[type="checkbox"]+label {
+  cursor: pointer;
 }
 input[type="checkbox"] + label::before {
   width: 18px;

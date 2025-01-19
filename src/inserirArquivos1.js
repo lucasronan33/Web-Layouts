@@ -66,10 +66,24 @@ function estruturaSelecao() {
 
     divChkSelecionarTudo.append(chkSelecionarTudo, labelSelecionarTudo)
 
+    const divButtons = document.createElement('div')
+    divButtons.classList = 'divButtons'
+    selecaoPDF.appendChild(divButtons)
+
     const btnInserirPaginas = document.createElement("button");
-    btnInserirPaginas.id = "btnInserirPaginas";
+    btnInserirPaginas.classList = "btnInserirPaginas";
     btnInserirPaginas.innerText = "Inserir";
-    selecaoPDF.appendChild(btnInserirPaginas);
+
+    const btnExcluirPaginas = document.createElement("button");
+    btnExcluirPaginas.classList = "btnExcluirPaginas";
+    btnExcluirPaginas.innerText = "Excluir";
+
+    divButtons.append(btnExcluirPaginas, btnInserirPaginas);
+
+    const boxArquivo = document.createElement('div')
+    boxArquivo.id = 'box-arquivo'
+    selecaoPDF.appendChild(boxArquivo)
+
 }
 
 botao.addEventListener("click", () => {
@@ -81,11 +95,11 @@ botao.addEventListener("click", () => {
     criarInput.addEventListener("change", async (event) => {
         const arquivos = event.target.files;
 
-        let selecaoPDF = document.querySelector('.selecaoPDF')
+        let boxArquivo = document.querySelector('#box-arquivo')
 
-        if (!selecaoPDF) {
+        if (!boxArquivo) {
             estruturaSelecao()
-            selecaoPDF = document.querySelector('.selecaoPDF')
+            boxArquivo = document.querySelector('#box-arquivo')
         }
 
         for (const arquivo of arquivos) {
@@ -94,8 +108,11 @@ botao.addEventListener("click", () => {
                 function criarEstrutura(nmPagina) {
                     const divArquivo = document.createElement("div");
                     divArquivo.classList.add("arquivo");
-                    selecaoPDF.appendChild(divArquivo);
+                    boxArquivo.appendChild(divArquivo);
 
+                    if (!nmPagina) {
+                        nmPagina = 1
+                    }
                     const chkArquivoSelecao = document.createElement('input');
                     chkArquivoSelecao.type = 'checkbox';
                     chkArquivoSelecao.name = `checkbox-${nmPagina}`
@@ -111,13 +128,8 @@ botao.addEventListener("click", () => {
                     arquivoSelecao.classList.add("arquivoSelecao");
                     divArquivo.appendChild(arquivoSelecao);
 
-                    const btnInserirPaginas = document.body.querySelector('#btnInserirPaginas')
-                    const pai = divArquivo.parentNode
-                    pai.insertBefore(divArquivo, btnInserirPaginas)//Insere o botão depois de todos as pagina (atualiza automaticamente)
-
                     marcaDesmarcaCheckbox(chkArquivoSelecao, chkArquivoSelecao)
                     marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao)
-
 
                     return {
                         divArquivo,
@@ -125,6 +137,31 @@ botao.addEventListener("click", () => {
                         arquivoSelecao
                     };
                 }
+                const btnInserirPaginas = document.querySelectorAll('.divButtons')
+
+                if (btnInserirPaginas.length < 2) {
+                    const paiBtnInserir = btnInserirPaginas[0].parentNode
+                    const btnClone = btnInserirPaginas[0].cloneNode(true)
+                    paiBtnInserir.appendChild(btnClone)
+
+                    let btnExcluirPaginas = document.querySelectorAll('.btnExcluirPaginas')
+                    for (const button of btnExcluirPaginas) {
+
+                        button.addEventListener('click', () => {
+                            let checkboxMarcadas = document.querySelectorAll('.chkArquivoSelecao')
+                            let boxArquivo = document.querySelector('#box-arquivo')
+                            for (const checkbox of checkboxMarcadas) {
+                                if (checkbox.checked === true) {
+                                    checkbox.parentNode.remove()
+                                }
+                            }
+                            if (boxArquivo.childNodes.length < 1) {
+                                boxArquivo.parentNode.remove()
+                            }
+                        })
+                    }
+                }
+
                 if (arquivo.type === "application/pdf") {
                     const pdf = await pdfjsLib.getDocument(arquivoURL).promise;
                     const numPagTotal = pdf.numPages;
@@ -142,7 +179,7 @@ botao.addEventListener("click", () => {
                         divArquivo,
                         chkArquivoSelecao,
                         arquivoSelecao
-                    } = criarEstrutura(i);
+                    } = criarEstrutura();
                 };
             }
 
