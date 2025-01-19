@@ -500,6 +500,16 @@ body {
       border: none;
       border-radius: 1vh;
       cursor: pointer;
+      transition: 0.2s linear;
+    }
+    button:hover {
+      background-color: var(--cor_fonte_2);
+      color: var(--cor_fonte_1);
+      box-shadow: 0vh 0vh 2vh 0vh var(--cor_fonte_3);
+      transition: 0.1s linear;
+    }
+    button:active {
+      box-shadow: 0 var(--cor_fonte_3);
     }
   }
 
@@ -525,42 +535,53 @@ body {
       cursor: pointer;
     }
 
-    .divButtons{
+    .divButtons {
       gap: 5vh;
       margin-top: -4vh;
       display: none;
+
+      button {
+        padding: 2vh 4vh;
+        background-color: var(--cor_fonte_2);
+        color: var(--cor_fonte_1);
+        border: none;
+        border-radius: 1vh;
+        cursor: pointer;
+        transition: 0.2s linear;
+      }
+      button:hover {
+        background-color: var(--cor_fonte_3);
+        color: var(--cor_fonte_2);
+        box-shadow: 0vh 0vh 1vh 0vh var(--cor_fonte_2);
+        transition: 0.1s linear;
+      }
+      button:active {
+        box-shadow: 0 var(--cor_fonte_2);
+      }
     }
 
-    #box-arquivo{
+    #box-arquivo {
       display: flex;
       flex-wrap: wrap;
       column-gap: 3vh;
       row-gap: 5vh;
 
-    .arquivo {
-      color: var(--cor_fonte_2);
-      cursor: pointer;
+      .arquivo {
+        color: var(--cor_fonte_2);
+        cursor: pointer;
 
-      .arquivoSelecao {
-        width: 300px;
-        height: 300px;
-        max-height: 300px;
-        background-color: red;
+        .arquivoSelecao {
+          width: 300px;
+          height: 300px;
+          max-height: 300px;
+          background-color: red;
+        }
       }
     }
-  }
-  #box-arquivo+.divButtons{
-    margin-top: 0;
-    display: none;
-  }
-    button {
-      padding: 2vh 4vh;
-      background-color: var(--cor_fonte_2);
-      color: var(--cor_fonte_1);
-      border: none;
-      border-radius: 1vh;
-      cursor: pointer;
-    }    
+    #box-arquivo + .divButtons {
+      margin-top: 0;
+      display: none;
+    }
   }
 }
 
@@ -568,7 +589,7 @@ body {
 input[type="checkbox"] {
   display: none;
 }
-input[type="checkbox"]+label {
+input[type="checkbox"] + label {
   cursor: pointer;
 }
 input[type="checkbox"] + label::before {
