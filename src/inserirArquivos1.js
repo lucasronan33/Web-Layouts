@@ -14,7 +14,7 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
             // console.log('desmarcado');
             let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
             checkboxSelecionarTodas.checked = false
-            // console.log('checkboxSelecionarTodas: desmarcou');
+            console.log('checkboxSelecionarTodas: desmarcou');
 
         } else {
             checkbox.checked = true
@@ -159,11 +159,11 @@ botao.addEventListener("click", () => {
                         arquivoSelecao
                     };
                 }
-                const btnInserirPaginas = document.querySelectorAll('.divButtons')
+                const divButtons = document.querySelectorAll('.divButtons')
 
-                if (btnInserirPaginas.length < 2) {
-                    const paiBtnInserir = btnInserirPaginas[0].parentNode
-                    const btnClone = btnInserirPaginas[0].cloneNode(true)
+                if (divButtons.length < 2) {
+                    const paiBtnInserir = divButtons[0].parentNode
+                    const btnClone = divButtons[0].cloneNode(true)
                     paiBtnInserir.appendChild(btnClone)
 
                     let btnExcluirPaginas = document.querySelectorAll('.btnExcluirPaginas')
@@ -194,6 +194,18 @@ botao.addEventListener("click", () => {
                             chkArquivoSelecao,
                             arquivoSelecao
                         } = criarEstrutura(i);
+                        const canvas = document.createElement('canvas')
+                        const context = canvas.getContext('2d')
+                        canvas.classList = 'arquivo_layout'
+                        arquivoSelecao.appendChild(canvas)
+
+                        const page = await pdf.getPage(i)
+                        const viewport = page.getViewport({ scale: 1 })
+
+                        canvas.width = viewport.width
+                        canvas.height = viewport.height
+
+                        await page.render({ canvasContext: context, viewport }).promise.then()
                     }
                 } else if (arquivo.type.startsWith("image/")) {
                     let arquivo_layout = document.createElement("img");
@@ -202,6 +214,9 @@ botao.addEventListener("click", () => {
                         chkArquivoSelecao,
                         arquivoSelecao
                     } = criarEstrutura();
+                    arquivo_layout.classList = 'imagemTeste'
+                    arquivo_layout.src = arquivoURL
+                    arquivoSelecao.appendChild(arquivo_layout)
                 };
             }
 
@@ -221,10 +236,10 @@ botao.addEventListener("click", () => {
 
         let divCheckboxPai = document.querySelector('.chkSelecionarTudo')
         let checkboxPai = document.querySelector('#selecionarTudo')
-        let checkboxFilho = document.getElementsByClassName('chkArquivoSelecao')
+        let checkboxFilho = document.querySelectorAll('.chkArquivoSelecao')
 
         document.addEventListener('checkboxAtualizado', () => {
-            let todosMarcados = verificaCheckboxMarcada(checkboxFilho)
+            let todosMarcados = verificaCheckboxMarcada(checkboxFilho, true)
             if (todosMarcados === true) {
                 checkboxPai.checked = true
             }
