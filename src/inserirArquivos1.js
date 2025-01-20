@@ -16,27 +16,10 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
             checkboxSelecionarTodas.checked = false
             // console.log('checkboxSelecionarTodas: desmarcou');
 
-            const verificacaoCheckbox = document.querySelectorAll('.chkArquivoSelecao')
-            for (const input of verificacaoCheckbox) {
-                let divButtons = document.querySelectorAll('.divButtons')
-                for (const div of divButtons) {
-                    if (input.checked === true <= 0) {
-                        div.style.display = 'none'
-                    }
-                }
-            }
         } else {
             checkbox.checked = true
             // console.log('marcado');
-            const verificacaoCheckbox = document.querySelectorAll('.chkArquivoSelecao')
-            for (const input of verificacaoCheckbox) {
-                let divButtons = document.querySelectorAll('.divButtons')
-                for (const div of divButtons) {
-                    if (input.checked === true > 0) {
-                        div.style.display = 'flex'
-                    }
-                }
-            }
+
         }
         document.dispatchEvent(new Event('checkboxAtualizado'))
     })
@@ -60,9 +43,29 @@ function marcarTodasCheckbox(checkboxPai, checkboxFilho) {
     })
 }
 
-function verificaCheckboxMarcada(checkboxFilho) {
-    const todosMarcados = Array.from(checkboxFilho).every(checkbox => checkbox.checked === true)
+function verificaCheckboxMarcada(checkboxFilho, valorBool) {
+    const todosMarcados = Array.from(checkboxFilho).every(checkbox => checkbox.checked === valorBool)
     return todosMarcados
+}
+
+function mostraEscondeButtons() {
+    const verificacaoCheckbox = document.querySelectorAll('.chkArquivoSelecao')
+    const arrayCheckbox = verificaCheckboxMarcada(verificacaoCheckbox, false)
+    if (arrayCheckbox) {
+        let divButtons = document.querySelectorAll('.divButtons')
+        for (const div of divButtons) {
+            div.style.display = 'none'
+        }
+    } else {
+        for (const input of verificacaoCheckbox) {
+            let divButtons = document.querySelectorAll('.divButtons')
+            for (const div of divButtons) {
+                if (input.checked === true > 0) {
+                    div.style.display = 'flex'
+                }
+            }
+        }
+    }
 }
 
 function estruturaSelecao() {
@@ -225,9 +228,11 @@ botao.addEventListener("click", () => {
             if (todosMarcados === true) {
                 checkboxPai.checked = true
             }
+            mostraEscondeButtons()
         })
         divCheckboxPai.addEventListener(('click'), () => {
             marcarTodasCheckbox(checkboxPai, checkboxFilho)
+            document.dispatchEvent(new Event('checkboxAtualizado'))
         })
 
     });
