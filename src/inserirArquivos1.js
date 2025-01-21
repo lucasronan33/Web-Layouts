@@ -108,6 +108,39 @@ function estruturaSelecao() {
 
 }
 
+function criarEstruturaLayout() {
+    let container_img = document.createElement("div");
+    container_img.classList.add("container-img");
+    corpo.appendChild(container_img); //aonde o elemento vai ser criado
+
+    let cotaAltura = document.createElement("div"); //criar elementos no HTML
+    cotaAltura.classList.add("altura");
+    container_img.appendChild(cotaAltura);
+
+    let cotaLargura = document.createElement("div");
+    cotaLargura.classList.add("largura");
+    container_img.appendChild(cotaLargura);
+
+    let img_lixeira = document.createElement("div");
+    img_lixeira.classList.add("img-lixeira");
+    container_img.appendChild(img_lixeira);
+
+    let lixeira = document.createElement("div");
+    lixeira.classList.add("lixeira");
+    img_lixeira.appendChild(lixeira);
+
+    let srcLixeira = document.createElement("img");
+    srcLixeira.setAttribute("src", "../img/ico_lixeira.png");
+    lixeira.appendChild(srcLixeira);
+
+    return {
+        img_lixeira,
+        container_img,
+        cotaAltura,
+        cotaLargura,
+        srcLixeira,
+    };
+}
 botao.addEventListener("click", () => {
     const criarInput = document.createElement("input");
     criarInput.type = "file";
@@ -127,7 +160,7 @@ botao.addEventListener("click", () => {
         for (const arquivo of arquivos) {
             if (arquivo) {
                 const arquivoURL = URL.createObjectURL(arquivo);
-                function criarEstrutura(nmPagina) {
+                function criarEstruturaCheckbox(nmPagina) {
                     const divArquivo = document.createElement("div");
                     divArquivo.classList.add("arquivo");
                     boxArquivo.appendChild(divArquivo);
@@ -182,6 +215,33 @@ botao.addEventListener("click", () => {
                             }
                         })
                     }
+
+                    // let btnInserir = paiBtnInserir.querySelectorAll('.btnInserirPaginas')
+                    // for (const button of btnInserir) {
+                    //     button.addEventListener('click', () => {
+                    //         console.log('EventListenner');
+
+                    //     })
+
+                    // }
+
+                    paiBtnInserir.addEventListener('click', (e) => {
+                        if (e.target.classList.contains('btnInserirPaginas')) {
+                            const { img_lixeira,
+                                container_img,
+                                cotaAltura,
+                                cotaLargura,
+                                srcLixeira, } = criarEstruturaLayout()
+
+                            let arquivo_layout = document.createElement('img')
+                            arquivo_layout.classList = 'arquivo_layout'
+                            //criar logica para clonar e inserir no layout o arquivo da checkbox selecionada 
+
+                            srcLixeira.addEventListener("click", () => {
+                                container_img.remove(); // Remove a div pai da lixeira
+                            })
+                        }
+                    })
                 }
 
                 if (arquivo.type === "application/pdf") {
@@ -193,7 +253,7 @@ botao.addEventListener("click", () => {
                             divArquivo,
                             chkArquivoSelecao,
                             arquivoSelecao
-                        } = criarEstrutura(i);
+                        } = criarEstruturaCheckbox(i);
                         const canvas = document.createElement('canvas')
                         const context = canvas.getContext('2d')
                         canvas.classList = 'arquivo_layout'
@@ -213,7 +273,7 @@ botao.addEventListener("click", () => {
                         divArquivo,
                         chkArquivoSelecao,
                         arquivoSelecao
-                    } = criarEstrutura();
+                    } = criarEstruturaCheckbox();
                     arquivo_layout.classList = 'imagemTeste'
                     arquivo_layout.src = arquivoURL
                     arquivoSelecao.appendChild(arquivo_layout)
