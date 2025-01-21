@@ -195,9 +195,9 @@ botao.addEventListener("click", () => {
                 const divButtons = document.querySelectorAll('.divButtons')
 
                 if (divButtons.length < 2) {
-                    const paiBtnInserir = divButtons[0].parentNode
+                    const paiDivButtons = divButtons[0].parentNode
                     const btnClone = divButtons[0].cloneNode(true)
-                    paiBtnInserir.appendChild(btnClone)
+                    paiDivButtons.appendChild(btnClone)
 
                     let btnExcluirPaginas = document.querySelectorAll('.btnExcluirPaginas')
                     for (const button of btnExcluirPaginas) {
@@ -225,21 +225,35 @@ botao.addEventListener("click", () => {
 
                     // }
 
-                    paiBtnInserir.addEventListener('click', (e) => {
+                    paiDivButtons.addEventListener('click', (e) => {
                         if (e.target.classList.contains('btnInserirPaginas')) {
-                            const { img_lixeira,
-                                container_img,
-                                cotaAltura,
-                                cotaLargura,
-                                srcLixeira, } = criarEstruturaLayout()
+                            const el = paiDivButtons.querySelector('.arquivoSelecao')
+                            // console.log(el.children[0]);
 
-                            let arquivo_layout = document.createElement('img')
-                            arquivo_layout.classList = 'arquivo_layout'
-                            //criar logica para clonar e inserir no layout o arquivo da checkbox selecionada 
+                            let checkboxSelecionadas = document.querySelectorAll('.chkArquivoSelecao')
+                            for (const checkbox of checkboxSelecionadas) {
+                                if (checkbox.checked === true) {
+                                    const { img_lixeira,
+                                        container_img,
+                                        cotaAltura,
+                                        cotaLargura,
+                                        srcLixeira, } = criarEstruturaLayout()
 
-                            srcLixeira.addEventListener("click", () => {
-                                container_img.remove(); // Remove a div pai da lixeira
-                            })
+                                    let arquivo_layout = checkbox.parentElement.querySelector('.arquivo_layout')
+                                    let arquivo_inserir = arquivo_layout.cloneNode(true)
+                                    img_lixeira.appendChild(arquivo_inserir)
+                                    console.log(arquivo_layout);
+
+                                    //criar logica para clonar e inserir no layout o arquivo da checkbox selecionada 
+
+                                    srcLixeira.addEventListener("click", () => {
+                                        container_img.remove(); // Remove a div pai da lixeira
+                                    })
+                                }
+                            }
+
+
+
                         }
                     })
                 }
@@ -274,7 +288,7 @@ botao.addEventListener("click", () => {
                         chkArquivoSelecao,
                         arquivoSelecao
                     } = criarEstruturaCheckbox();
-                    arquivo_layout.classList = 'imagemTeste'
+                    arquivo_layout.classList = 'arquivo_layout'
                     arquivo_layout.src = arquivoURL
                     arquivoSelecao.appendChild(arquivo_layout)
                 };
