@@ -113,14 +113,6 @@ function criarEstruturaLayout() {
     container_img.classList.add("container-img");
     corpo.appendChild(container_img); //aonde o elemento vai ser criado
 
-    let cotaAltura = document.createElement("div"); //criar elementos no HTML
-    cotaAltura.classList.add("altura");
-    container_img.appendChild(cotaAltura);
-
-    let cotaLargura = document.createElement("div");
-    cotaLargura.classList.add("largura");
-    container_img.appendChild(cotaLargura);
-
     let img_lixeira = document.createElement("div");
     img_lixeira.classList.add("img-lixeira");
     container_img.appendChild(img_lixeira);
@@ -136,8 +128,6 @@ function criarEstruturaLayout() {
     return {
         img_lixeira,
         container_img,
-        cotaAltura,
-        cotaLargura,
         srcLixeira,
     };
 }
@@ -235,14 +225,13 @@ botao.addEventListener("click", () => {
                                 if (checkbox.checked === true) {
                                     const { img_lixeira,
                                         container_img,
-                                        cotaAltura,
-                                        cotaLargura,
                                         srcLixeira, } = criarEstruturaLayout()
 
                                     let arquivo_layout = checkbox.parentElement.querySelector('.arquivo_layout')
+                                    let medida_arquivo_layout = arquivo_layout
                                     let arquivo_inserir = arquivo_layout.cloneNode(true)
                                     img_lixeira.appendChild(arquivo_inserir)
-                                    console.log(arquivo_layout);
+                                    console.log(window.devicePixelRatio);
 
                                     //criar logica para clonar e inserir no layout o arquivo da checkbox selecionada 
 
@@ -327,3 +316,8 @@ botao.addEventListener("click", () => {
     });
     criarInput.click();
 });
+
+let botaoteste = document.querySelector('.botaoteste')
+botaoteste.addEventListener('click', () => {
+    botaoteste.innerText = window.devicePixelRatio
+})
