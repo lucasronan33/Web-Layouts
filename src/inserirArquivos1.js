@@ -285,7 +285,7 @@ botao.addEventListener("click", () => {
 
             function gerarCotas(largura, altura, cotaAltura, cotaLargura) {
                 const PPI = 100; //Pixel por polegada (padrão por tela)
-                const polegadasParaMM = 35.278; //1 polegada = 2,54cm
+                const polegadasParaMM = 35.2777784; //1 polegada = 2,54cm
 
                 const larguraMM = (largura / PPI) * polegadasParaMM;
                 const alturaMM = (altura / PPI) * polegadasParaMM;
@@ -316,8 +316,3 @@ botao.addEventListener("click", () => {
     });
     criarInput.click();
 });
-
-let botaoteste = document.querySelector('.botaoteste')
-botaoteste.addEventListener('click', () => {
-    botaoteste.innerText = window.devicePixelRatio
-})
