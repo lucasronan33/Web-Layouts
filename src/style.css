@@ -570,6 +570,18 @@ body {
         color: var(--cor_fonte_2);
         cursor: pointer;
 
+        .divCheckboxes{
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          .chkArquivoSelecao + label{
+            margin: 0;
+          }
+          .chkMedidasArquivo + label{
+            margin: 0;
+          }
+        }
         .arquivoSelecao {
           width: 300px;
           height: 300px;

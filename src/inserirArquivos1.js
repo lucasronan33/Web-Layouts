@@ -158,6 +158,11 @@ botao.addEventListener("click", () => {
                     if (!nmPagina) {
                         nmPagina = 1
                     }
+
+                    const divCheckboxes = document.createElement('div')
+                    divCheckboxes.classList = 'divCheckboxes'
+                    divArquivo.appendChild(divCheckboxes)
+
                     const chkArquivoSelecao = document.createElement('input');
                     chkArquivoSelecao.type = 'checkbox';
                     chkArquivoSelecao.name = `checkbox-${nmPagina}`
@@ -167,14 +172,25 @@ botao.addEventListener("click", () => {
                     label.setAttribute('for', `checkbox-${nmPagina}`)
                     label.textContent = `Página ${nmPagina}`
 
-                    divArquivo.append(chkArquivoSelecao, label)
+                    const chkMedidasArquivo = document.createElement('input');
+                    chkMedidasArquivo.type = 'checkbox';
+                    chkMedidasArquivo.name = `medidas-${nmPagina}`
+                    chkMedidasArquivo.classList.add("chkMedidasArquivo");
+
+                    const labelMedidasArquivo = document.createElement('label')
+                    labelMedidasArquivo.setAttribute('for', `medidas-${nmPagina}`)
+                    labelMedidasArquivo.textContent = `Inserir medidas`
+
+                    divCheckboxes.append(chkArquivoSelecao, label, chkMedidasArquivo, labelMedidasArquivo)
 
                     const arquivoSelecao = document.createElement("div");
                     arquivoSelecao.classList.add("arquivoSelecao");
                     divArquivo.appendChild(arquivoSelecao);
 
-                    marcaDesmarcaCheckbox(chkArquivoSelecao, chkArquivoSelecao)
-                    marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao)
+                    marcaDesmarcaCheckbox(label, chkArquivoSelecao)
+                    marcaDesmarcaCheckbox(labelMedidasArquivo, chkMedidasArquivo)
+                    marcaDesmarcaCheckbox(arquivoSelecao, chkArquivoSelecao)
+                    marcaDesmarcaCheckbox(arquivoSelecao, chkMedidasArquivo)
 
                     return {
                         divArquivo,
@@ -197,7 +213,8 @@ botao.addEventListener("click", () => {
                             let boxArquivo = document.querySelector('#box-arquivo')
                             for (const checkbox of checkboxMarcadas) {
                                 if (checkbox.checked === true) {
-                                    checkbox.parentNode.remove()
+                                    let paiCheckbox = checkbox.parentNode
+                                    paiCheckbox.parentNode.remove()
                                 }
                             }
                             if (boxArquivo.childNodes.length < 1) {
@@ -215,7 +232,7 @@ botao.addEventListener("click", () => {
 
                     // }
 
-                    paiDivButtons.addEventListener('click', (e) => {
+                    paiDivButtons.addEventListener('click', function inserirArquivos(e) {
                         if (e.target.classList.contains('btnInserirPaginas')) {
                             const el = paiDivButtons.querySelector('.arquivoSelecao')
                             // console.log(el.children[0]);
@@ -226,12 +243,33 @@ botao.addEventListener("click", () => {
                                     const { img_lixeira,
                                         container_img,
                                         srcLixeira, } = criarEstruturaLayout()
+                                    let pai_arquivo_layout = checkbox.parentElement
+                                    let arquivo_layout = pai_arquivo_layout.parentElement.querySelector('.arquivo_layout')
+                                    if (arquivo_layout.tagName === 'CANVAS') {
+                                        console.log('canvas selecionado');
 
-                                    let arquivo_layout = checkbox.parentElement.querySelector('.arquivo_layout')
-                                    let medida_arquivo_layout = arquivo_layout
-                                    let arquivo_inserir = arquivo_layout.cloneNode(true)
-                                    img_lixeira.appendChild(arquivo_inserir)
-                                    console.log(window.devicePixelRatio);
+                                        //METODO: TRANSFORMANDO CANVAS EM IMAGEM 
+                                        // let dataURL = arquivo_layout.toDataURL('image/png')
+
+                                        // let arquivo_inserir = document.createElement('img')
+                                        // arquivo_inserir.src = dataURL
+                                        // arquivo_inserir.classList = 'arquivo_layout'
+
+
+                                        //METODO: CLONANDO CANVAS 
+                                        let arquivo_inserir = arquivo_layout.cloneNode(true)
+                                        let renderArquivo_inserir = arquivo_inserir.getContext('2d')//pega o contexto 2D do clone
+
+                                        renderArquivo_inserir.drawImage(arquivo_layout, 0, 0)//desenha o arquivo original no clone
+
+                                        img_lixeira.appendChild(arquivo_inserir)
+
+                                    } else {
+                                        console.log('img selecionado');
+
+                                        let arquivo_inserir = arquivo_layout.cloneNode(true)
+                                        img_lixeira.appendChild(arquivo_inserir)
+                                    }
 
                                     //criar logica para clonar e inserir no layout o arquivo da checkbox selecionada 
 
