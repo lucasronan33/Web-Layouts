@@ -256,9 +256,8 @@ botao.addEventListener("click", () => {
                                         let cotaLargura = document.createElement("div");
                                         cotaLargura.classList.add("largura");
                                         container_img.appendChild(cotaLargura);
-                                        const viewport = arquivo_layout.getViewport({ scale: 1 })
 
-                                        console.log(arquivo_layout.Width = viewport.width);
+                                        console.log();
 
                                         // gerarCotas(arquivo_layout.naturalWidth, arquivo_layout.naturalHeight, cotaLargura, cotaAltura)
                                     }
