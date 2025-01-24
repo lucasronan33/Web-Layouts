@@ -12,9 +12,9 @@ function marcaDesmarcaCheckbox(elemento, checkbox) {
         if (checkbox.checked === true) {
             checkbox.checked = false
             // console.log('desmarcado');
-            let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
-            checkboxSelecionarTodas.checked = false
-            console.log('checkboxSelecionarTodas: desmarcou');
+            // let checkboxSelecionarTodas = document.querySelector('#selecionarTudo')
+            // checkboxSelecionarTodas.checked = false
+            // console.log('checkboxSelecionarTodas: desmarcou\n', checkboxSelecionarTodas);
 
         } else {
             checkbox.checked = true
@@ -60,7 +60,7 @@ function mostraEscondeButtons() {
         for (const input of verificacaoCheckbox) {
             let divButtons = document.querySelectorAll('.divButtons')
             for (const div of divButtons) {
-                if (input.checked === true > 0) {
+                if (input.checked === true) {
                     div.style.display = 'flex'
                 }
             }
@@ -208,7 +208,7 @@ botao.addEventListener("click", () => {
                     let btnExcluirPaginas = document.querySelectorAll('.btnExcluirPaginas')
                     for (const button of btnExcluirPaginas) {
 
-                        button.addEventListener('click', () => {
+                        button.addEventListener('click', function excluirPaginas() {
                             let checkboxMarcadas = document.querySelectorAll('.chkArquivoSelecao')
                             let boxArquivo = document.querySelector('#box-arquivo')
                             for (const checkbox of checkboxMarcadas) {
@@ -343,7 +343,14 @@ botao.addEventListener("click", () => {
             let todosMarcados = verificaCheckboxMarcada(checkboxFilho, true)
             if (todosMarcados === true) {
                 checkboxPai.checked = true
+                console.log(todosMarcados);
+            } else {
+                checkboxPai.checked = false
+                console.log(todosMarcados);
+
             }
+            console.log('fui executado');
+
             mostraEscondeButtons()
         })
         divCheckboxPai.addEventListener(('click'), () => {
@@ -354,3 +361,4 @@ botao.addEventListener("click", () => {
     });
     criarInput.click();
 });
+document.dispatchEvent(new Event('checkboxAtualizado'))
