@@ -234,7 +234,6 @@ botao.addEventListener("click", () => {
 
                     paiDivButtons.addEventListener('click', function inserirArquivos(e) {
                         if (e.target.classList.contains('btnInserirPaginas')) {
-                            const el = paiDivButtons.querySelector('.arquivoSelecao')
                             // console.log(el.children[0]);
 
                             let checkboxSelecionadas = document.querySelectorAll('.chkArquivoSelecao')
@@ -243,8 +242,27 @@ botao.addEventListener("click", () => {
                                     const { img_lixeira,
                                         container_img,
                                         srcLixeira, } = criarEstruturaLayout()
+
                                     let pai_arquivo_layout = checkbox.parentElement
                                     let arquivo_layout = pai_arquivo_layout.parentElement.querySelector('.arquivo_layout')
+
+                                    let checkboxInserirMedidas = checkbox.parentElement.querySelector('.chkMedidasArquivo')
+                                    if (checkboxInserirMedidas.checked === true) {
+
+                                        let cotaAltura = document.createElement("div"); //criar elementos no HTML
+                                        cotaAltura.classList.add("altura");
+                                        container_img.appendChild(cotaAltura);
+
+                                        let cotaLargura = document.createElement("div");
+                                        cotaLargura.classList.add("largura");
+                                        container_img.appendChild(cotaLargura);
+                                        const viewport = arquivo_layout.getViewport({ scale: 1 })
+
+                                        console.log(arquivo_layout.Width = viewport.width);
+
+                                        // gerarCotas(arquivo_layout.naturalWidth, arquivo_layout.naturalHeight, cotaLargura, cotaAltura)
+                                    }
+
                                     if (arquivo_layout.tagName === 'CANVAS') {
                                         console.log('canvas selecionado');
 
@@ -321,7 +339,7 @@ botao.addEventListener("click", () => {
                 };
             }
 
-            function gerarCotas(largura, altura, cotaAltura, cotaLargura) {
+            function gerarCotas(largura, altura, cotaLargura, cotaAltura) {
                 const PPI = 100; //Pixel por polegada (padrão por tela)
                 const polegadasParaMM = 35.2777784; //1 polegada = 2,54cm
 
@@ -361,4 +379,3 @@ botao.addEventListener("click", () => {
     });
     criarInput.click();
 });
-document.dispatchEvent(new Event('checkboxAtualizado'))
