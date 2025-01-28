@@ -68,6 +68,19 @@ function mostraEscondeButtons() {
     }
 }
 
+function gerarCotas(largura, altura, cotaLargura, cotaAltura) {
+    const PPI = 100; //Pixel por polegada (padrão por tela)
+    const polegadasParaMM = 35.2777784; //1 polegada = 2,54cm
+
+    const larguraMM = (largura / PPI) * polegadasParaMM;
+    const alturaMM = (altura / PPI) * polegadasParaMM;
+
+    cotaAltura.innerText = alturaMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
+    cotaLargura.innerText = larguraMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
+
+    console.log(`largura: ${larguraMM}mm \naltura: ${alturaMM}mm`);
+}
+
 function estruturaSelecao() {
     const selecaoPDF = document.createElement('div')
     selecaoPDF.classList.add('selecaoPDF')
@@ -256,51 +269,56 @@ botao.addEventListener("click", () => {
                                         let cotaLargura = document.createElement("div");
                                         cotaLargura.classList.add("largura");
                                         container_img.appendChild(cotaLargura);
+                                        if (arquivo_layout.tagName === 'CANVAS') {
+                                            console.log('canvas selecionado');
 
-                                        console.log();
+                                            //METODO: TRANSFORMANDO CANVAS EM IMAGEM 
+                                            // let dataURL = arquivo_layout.toDataURL('image/png')
 
-                                        // gerarCotas(arquivo_layout.naturalWidth, arquivo_layout.naturalHeight, cotaLargura, cotaAltura)
-                                    }
-
-                                    if (arquivo_layout.tagName === 'CANVAS') {
-                                        console.log('canvas selecionado');
-
-                                        //METODO: TRANSFORMANDO CANVAS EM IMAGEM 
-                                        // let dataURL = arquivo_layout.toDataURL('image/png')
-
-                                        // let arquivo_inserir = document.createElement('img')
-                                        // arquivo_inserir.src = dataURL
-                                        // arquivo_inserir.classList = 'arquivo_layout'
+                                            // let arquivo_inserir = document.createElement('img')
+                                            // arquivo_inserir.src = dataURL
+                                            // arquivo_inserir.classList = 'arquivo_layout'
 
 
-                                        //METODO: CLONANDO CANVAS 
-                                        let arquivo_inserir = arquivo_layout.cloneNode(true)
-                                        let renderArquivo_inserir = arquivo_inserir.getContext('2d')//pega o contexto 2D do clone
+                                            //METODO: CLONANDO CANVAS 
+                                            let arquivo_inserir = arquivo_layout.cloneNode(true)
+                                            let renderArquivo_inserir = arquivo_inserir.getContext('2d')//pega o contexto 2D do clone
 
-                                        renderArquivo_inserir.drawImage(arquivo_layout, 0, 0)//desenha o arquivo original no clone
+                                            renderArquivo_inserir.drawImage(arquivo_layout, 0, 0)//desenha o arquivo original no clone
 
-                                        img_lixeira.appendChild(arquivo_inserir)
+                                            img_lixeira.appendChild(arquivo_inserir)
 
-                                    } else {
-                                        console.log('img selecionado');
+                                            let largura = (arquivo_layout.width / 72) * 25.4
+                                            let altura = (arquivo_layout.height / 72) * 25.4
 
-                                        let arquivo_inserir = arquivo_layout.cloneNode(true)
-                                        img_lixeira.appendChild(arquivo_inserir)
-                                    }
-
-                                    //criar logica para clonar e inserir no layout o arquivo da checkbox selecionada 
-
-                                    srcLixeira.addEventListener("click", () => {
-                                        container_img.remove(); // Remove a div pai da lixeira
-                                    })
-                                }
-                            }
+                                            cotaAltura.innerText = altura.toFixed(2) + 'mm'
+                                            container_img.appendChild(cotaAltura);
+                                            ;
+                                            cotaLargura.innerText = largura.toFixed(2) + 'mm'
+                                            container_img.appendChild(cotaLargura);
 
 
+                                            console.log(largura);
+                                            console.log(altura);
 
-                        }
-                    })
-                }
+                                        } else {
+                                            console.log('img selecionado');
+
+                                            let arquivo_inserir = arquivo_layout.cloneNode(true)
+                                            img_lixeira.appendChild(arquivo_inserir)
+
+                                            gerarCotas(arquivo_layout.naturalWidth, arquivo_layout.naturalHeight, cotaLargura, cotaAltura)
+                                        }
+
+                                        srcLixeira.addEventListener("click", () => {
+                                            container_img.remove(); // Remove a div pai da lixeira
+                                        })
+                                    }//fim condicional checkboxMedidasInserir
+                                }//fim condicional checkbox das paginas selecionadas
+                            }//fim do FOR para iteração das checkbox
+                        }//fim condicional para capturar classe do botao
+                    })//fim evento para capturar click no botao INSERIR
+                }//fim condicional para duplicar os botões
 
                 if (arquivo.type === "application/pdf") {
                     const pdf = await pdfjsLib.getDocument(arquivoURL).promise;
@@ -323,6 +341,15 @@ botao.addEventListener("click", () => {
                         canvas.width = viewport.width
                         canvas.height = viewport.height
 
+                        const largura = (canvas.width / 72) * 25.4
+                        const altura = (canvas.height / 72) * 25.4
+
+                        const textoLargura = document.createTextNode(largura)
+                        const textoAltura = document.createTextNode(altura)
+                        canvas.append(textoLargura, textoAltura)
+                        console.log(`${largura.toFixed(2)} x ${altura.toFixed(2)}mm`);
+
+
                         await page.render({ canvasContext: context, viewport }).promise.then()
                     }
                 } else if (arquivo.type.startsWith("image/")) {
@@ -336,19 +363,6 @@ botao.addEventListener("click", () => {
                     arquivo_layout.src = arquivoURL
                     arquivoSelecao.appendChild(arquivo_layout)
                 };
-            }
-
-            function gerarCotas(largura, altura, cotaLargura, cotaAltura) {
-                const PPI = 100; //Pixel por polegada (padrão por tela)
-                const polegadasParaMM = 35.2777784; //1 polegada = 2,54cm
-
-                const larguraMM = (largura / PPI) * polegadasParaMM;
-                const alturaMM = (altura / PPI) * polegadasParaMM;
-
-                cotaAltura.innerText = alturaMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
-                cotaLargura.innerText = larguraMM.toFixed(2) + "mm"; //toFixed(n) define a quantidade de casas decimais
-
-                console.log(`largura: ${larguraMM}mm \naltura: ${alturaMM}mm`);
             }
         }
 
