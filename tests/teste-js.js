@@ -11,7 +11,8 @@ let startX, startY;
 
 let elementos = [
     { x: 100, y: 100, width: 150, height: 100, color: "blue" },
-    { x: 300, y: 200, width: 120, height: 80, color: "red" }
+    { x: 300, y: 200, width: 120, height: 80, color: "red" },
+    { x: 50, y: 200, width: 120, height: 80, color: "red" }
 ];
 
 function desenharElementos() {

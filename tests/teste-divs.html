@@ -1,42 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editor de Canvas</title>
+  <title>Movimentar Elementos</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    canvas {
-      border: 1px solid black;
-      cursor: default;
-    }
-  .div1{
-    background-color: red;
-    width: 100px;
-    height: 100px;
-  }
-  .div2{
-    background-color: aqua;
-    width: 100px;
-    height: 100px;
-  }
-    button {
-      margin: 5px;
-      padding: 10px;
-      cursor: pointer;
-    }
-  </style>
-  </head>
-  
-  <body>
-    <!-- <button onclick="ferramenta = 'mover'">Mover</button>
-    <button onclick="ferramenta = 'redimensionar'">Redimensionar</button> -->
-    <canvas id="editorCanvas">
-      <div class="div1"></div>
-      <div class="div2"></div>
-    </canvas>
+    /* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+} */
 
-  <script src="./teste-js.js"></script>
+/* #container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+} */
+
+.movable {
+    width: 150px;
+    height: 150px;
+    background-color: #4CAF50;
+    /* color: white;
+    text-align: center;
+    line-height: 150px;
+    border-radius: 10px; */
+    cursor: pointer;
+    position: absolute;
+    resize: horizontal;
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- <div id="container"> -->
+    <div id="movableElement" class="movable">
+      <!-- Arraste-me! -->
+    </div>
+  <!-- </div> -->
+  <script src="./teste-js-2.js"></script>
 </body>
 
 </html>
