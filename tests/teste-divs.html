@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Testes</title>
 
-    <style>
-      #corpo {
-        height: 700px;
-        background-color: red;
-        .teste {
-          width: 70px;
-          height: 70px;
-          background-color: aqua;
-        }
-      }
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Canvas</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      cursor: default;
+    }
+  .div1{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+  }
+  .div2{
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+  }
+    button {
+      margin: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
   </head>
-
+  
   <body>
-    <div id="corpo">
-      <div id="testes"></div>
-    </div>
-  </body>
+    <!-- <button onclick="ferramenta = 'mover'">Mover</button>
+    <button onclick="ferramenta = 'redimensionar'">Redimensionar</button> -->
+    <canvas id="editorCanvas">
+      <div class="div1"></div>
+      <div class="div2"></div>
+    </canvas>
 
-  <script>
-    const corpo = document.getElementById("corpo");
-    estiloCorpo = corpo.style;
+  <script src="./teste-js.js"></script>
+</body>
 
-    let numero = 0;
-    corpo.addEventListener("click", () => {
-      let criar = document.createElement("div");
-      criar.className = "teste";
-      criar.id = "teste" + numero;
-      criar.innerText = `${numero}`;
-      numero++;
-
-      corpo.appendChild(criar);
-    });
-  </script>
 </html>

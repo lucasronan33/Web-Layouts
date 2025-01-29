@@ -1,124 +1,135 @@
-const corpo = document.getElementById("corpoLayout");
-const botao = document.getElementById("lblCaminho");
+const canvas = document.getElementById("editorCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = 800;
+canvas.height = 600;
 
-// Configuração do caminho para o worker
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+let selecionados = new Set();
+let movendo = false;
+let redimensionando = false;
+let alcaSelecionada = null;
+let startX, startY;
 
-function marcaDesmarcaCheckbox(elemento, checkbox) {
-    elemento.addEventListener('click', () => {
-        checkbox.checked = !checkbox.checked;
-        document.dispatchEvent(new Event('checkboxAtualizado'));
+let elementos = [
+    { x: 100, y: 100, width: 150, height: 100, color: "blue" },
+    { x: 300, y: 200, width: 120, height: 80, color: "red" }
+];
+
+function desenharElementos() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    elementos.forEach(el => {
+        ctx.fillStyle = el.color;
+        ctx.fillRect(el.x, el.y, el.width, el.height);
     });
+    if (selecionados.size > 0) desenharCaixaSelecao();
 }
 
-function marcarTodasCheckbox(checkboxPai, checkboxFilho) {
-    Array.from(checkboxFilho).forEach(checkbox => {
-        checkbox.checked = checkboxPai.checked;
+function desenharCaixaSelecao() {
+    const { x, y, width, height } = calcularBoundingBox();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y, width, height);
+    desenharAlcasRedimensionamento(x, y, width, height);
+}
+
+function desenharAlcasRedimensionamento(x, y, width, height) {
+    desenharAlca(x, y, "nw");
+    desenharAlca(x + width / 2, y, "n");
+    desenharAlca(x + width, y, "ne");
+    desenharAlca(x, y + height / 2, "w");
+    desenharAlca(x + width, y + height / 2, "e");
+    desenharAlca(x, y + height, "sw");
+    desenharAlca(x + width / 2, y + height, "s");
+    desenharAlca(x + width, y + height, "se");
+}
+
+function desenharAlca(x, y, tipo) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(x - 5, y - 5, 10, 10);
+}
+
+function calcularBoundingBox() {
+    let xMin = Infinity, yMin = Infinity, xMax = -Infinity, yMax = -Infinity;
+    selecionados.forEach(el => {
+        xMin = Math.min(xMin, el.x);
+        yMin = Math.min(yMin, el.y);
+        xMax = Math.max(xMax, el.x + el.width);
+        yMax = Math.max(yMax, el.y + el.height);
     });
-    document.dispatchEvent(new Event('checkboxAtualizado'));
+    return { x: xMin, y: yMin, width: xMax - xMin, height: yMax - yMin };
 }
 
-function verificarTodosSelecionados(checkboxFilho, checkboxPai) {
-    const todosMarcados = Array.from(checkboxFilho).every(cb => cb.checked);
-    checkboxPai.checked = todosMarcados;
-}
+canvas.addEventListener("mousedown", (e) => {
+    const { offsetX: x, offsetY: y } = e;
+    let selecionouAlgo = false;
+    let boundingBox = calcularBoundingBox();
 
-function estruturaSelecao() {
-    const selecaoPDF = document.createElement('div');
-    selecaoPDF.classList.add('selecaoPDF');
-    document.body.appendChild(selecaoPDF);
+    // Verifica se clicou em uma alça
+    let alcas = [
+        { x: boundingBox.x, y: boundingBox.y, tipo: "nw" },
+        { x: boundingBox.x + boundingBox.width / 2, y: boundingBox.y, tipo: "n" },
+        { x: boundingBox.x + boundingBox.width, y: boundingBox.y, tipo: "ne" },
+        { x: boundingBox.x, y: boundingBox.y + boundingBox.height / 2, tipo: "w" },
+        { x: boundingBox.x + boundingBox.width, y: boundingBox.y + boundingBox.height / 2, tipo: "e" },
+        { x: boundingBox.x, y: boundingBox.y + boundingBox.height, tipo: "sw" },
+        { x: boundingBox.x + boundingBox.width / 2, y: boundingBox.y + boundingBox.height, tipo: "s" },
+        { x: boundingBox.x + boundingBox.width, y: boundingBox.y + boundingBox.height, tipo: "se" }
+    ];
 
-    const divChkSelecionarTudo = document.createElement('div');
-    divChkSelecionarTudo.classList.add('chkSelecionarTudo');
-    selecaoPDF.appendChild(divChkSelecionarTudo);
-
-    const chkSelecionarTudo = document.createElement('input');
-    chkSelecionarTudo.type = 'checkbox';
-    chkSelecionarTudo.id = 'selecionarTudo';
-    divChkSelecionarTudo.append(chkSelecionarTudo, 'Desmarcar / Marcar tudo');
-
-    const btnInserirPaginas = document.createElement("button");
-    btnInserirPaginas.id = "btnInserirPaginas";
-    btnInserirPaginas.innerText = "Inserir";
-    selecaoPDF.appendChild(btnInserirPaginas);
-
-    marcaDesmarcaCheckbox(divChkSelecionarTudo, chkSelecionarTudo);
-}
-
-botao.addEventListener("click", () => {
-    const criarInput = document.createElement("input");
-    criarInput.type = "file";
-    criarInput.accept = "image/*, application/pdf";
-    criarInput.setAttribute("multiple", "");
-
-    criarInput.addEventListener("change", async (event) => {
-        const arquivos = event.target.files;
-
-        let selecaoPDF = document.querySelector('.selecaoPDF');
-
-        if (!selecaoPDF) {
-            estruturaSelecao();
-            selecaoPDF = document.querySelector('.selecaoPDF');
+    alcas.forEach(alca => {
+        if (x >= alca.x - 5 && x <= alca.x + 5 && y >= alca.y - 5 && y <= alca.y + 5) {
+            redimensionando = true;
+            alcaSelecionada = alca.tipo;
         }
+    });
 
-        for (const [index, arquivo] of Array.from(arquivos).entries()) {
-            if (arquivo) {
-                const arquivoURL = URL.createObjectURL(arquivo);
-
-                function criarEstrutura(nmPagina) {
-                    const divArquivo = document.createElement("div");
-                    divArquivo.classList.add("arquivo");
-                    selecaoPDF.appendChild(divArquivo);
-
-                    const chkArquivoSelecao = document.createElement('input');
-                    chkArquivoSelecao.type = 'checkbox';
-                    chkArquivoSelecao.classList.add("chkArquivoSelecao");
-                    divArquivo.append(chkArquivoSelecao, `Página ${nmPagina}`);
-
-                    const arquivoSelecao = document.createElement("div");
-                    arquivoSelecao.classList.add("arquivoSelecao");
-                    divArquivo.appendChild(arquivoSelecao);
-
-                    const btnInserirPaginas = document.body.querySelector('#btnInserirPaginas');
-                    const pai = divArquivo.parentNode;
-                    pai.insertBefore(divArquivo, btnInserirPaginas);
-
-                    marcaDesmarcaCheckbox(divArquivo, chkArquivoSelecao);
-
-                    return { divArquivo, chkArquivoSelecao, arquivoSelecao };
+    if (!redimensionando) {
+        elementos.forEach(el => {
+            if (x >= el.x && x <= el.x + el.width && y >= el.y && y <= el.y + el.height) {
+                if (e.shiftKey) {
+                    selecionados.has(el) ? selecionados.delete(el) : selecionados.add(el);
+                } else {
+                    selecionados.clear();
+                    selecionados.add(el);
                 }
-
-                if (arquivo.type === "application/pdf") {
-                    const pdf = await pdfjsLib.getDocument(arquivoURL).promise;
-                    const numPagTotal = pdf.numPages;
-
-                    for (let i = 1; i <= numPagTotal; i++) {
-                        criarEstrutura(i);
-                    }
-                } else if (arquivo.type.startsWith("image/")) {
-                    criarEstrutura(index + 1);
-                }
+                selecionouAlgo = true;
+                movendo = true;
             }
-        }
-
-        const checkboxPai = document.querySelector('#selecionarTudo');
-        const checkboxFilho = document.getElementsByClassName('chkArquivoSelecao');
-
-        document.addEventListener('checkboxAtualizado', () => {
-            verificarTodosSelecionados(checkboxFilho, checkboxPai);
         });
+    }
 
-        checkboxPai.addEventListener('change', () => {
-            marcarTodasCheckbox(checkboxPai, checkboxFilho);
-        });
-
-        Array.from(checkboxFilho).forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                verificarTodosSelecionados(checkboxFilho, checkboxPai);
-            });
-        });
-    });
-
-    criarInput.click();
+    if (!selecionouAlgo && !redimensionando) selecionados.clear();
+    startX = x;
+    startY = y;
+    desenharElementos();
 });
+
+canvas.addEventListener("mousemove", (e) => {
+    if (movendo && e.buttons === 1) {
+        selecionados.forEach(el => {
+            el.x += e.movementX;
+            el.y += e.movementY;
+        });
+        desenharElementos();
+    }
+
+    if (redimensionando && e.buttons === 1) {
+        let dx = e.offsetX - startX;
+        let dy = e.offsetY - startY;
+        selecionados.forEach(el => {
+            if (alcaSelecionada.includes("e")) el.width += dx;
+            if (alcaSelecionada.includes("s")) el.height += dy;
+            if (alcaSelecionada.includes("w")) { el.x += dx; el.width -= dx; }
+            if (alcaSelecionada.includes("n")) { el.y += dy; el.height -= dy; }
+        });
+        startX = e.offsetX;
+        startY = e.offsetY;
+        desenharElementos();
+    }
+});
+
+canvas.addEventListener("mouseup", () => {
+    movendo = false;
+    redimensionando = false;
+});
+
+desenharElementos();
