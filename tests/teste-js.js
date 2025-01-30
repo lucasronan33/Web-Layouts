@@ -1,136 +1,105 @@
-const canvas = document.getElementById("editorCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = 800;
-canvas.height = 600;
 
-let selecionados = new Set();
-let movendo = false;
-let redimensionando = false;
-let alcaSelecionada = null;
-let startX, startY;
+const editor = document.getElementById("editor");
+let selectedDiv = null;
+let startX, startY, startWidth, startHeight, startLeft, startTop;
+let isResizing = false;
+let isMoving = false;
+let selectedHandles = [];
 
-let elementos = [
-    { x: 100, y: 100, width: 150, height: 100, color: "blue" },
-    { x: 300, y: 200, width: 120, height: 80, color: "red" },
-    { x: 50, y: 200, width: 120, height: 80, color: "red" }
-];
-
-function desenharElementos() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    elementos.forEach(el => {
-        ctx.fillStyle = el.color;
-        ctx.fillRect(el.x, el.y, el.width, el.height);
+function createResizeHandles(div) {
+    const positions = ['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se'];
+    positions.forEach(position => {
+        const handle = document.createElement('div');
+        handle.classList.add('resize-handle', position);
+        handle.addEventListener('mousedown', (e) => startResizing(e, div, position));
+        div.appendChild(handle);
     });
-    if (selecionados.size > 0) desenharCaixaSelecao();
 }
 
-function desenharCaixaSelecao() {
-    const { x, y, width, height } = calcularBoundingBox();
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(x, y, width, height);
-    desenharAlcasRedimensionamento(x, y, width, height);
+function startResizing(e, div, position) {
+    isResizing = true;
+    selectedHandles = [position];
+    startX = e.clientX;
+    startY = e.clientY;
+    startWidth = div.offsetWidth;
+    startHeight = div.offsetHeight;
+    startLeft = div.offsetLeft;
+    startTop = div.offsetTop;
+    e.stopPropagation();
 }
 
-function desenharAlcasRedimensionamento(x, y, width, height) {
-    desenharAlca(x, y, "nw");
-    desenharAlca(x + width / 2, y, "n");
-    desenharAlca(x + width, y, "ne");
-    desenharAlca(x, y + height / 2, "w");
-    desenharAlca(x + width, y + height / 2, "e");
-    desenharAlca(x, y + height, "sw");
-    desenharAlca(x + width / 2, y + height, "s");
-    desenharAlca(x + width, y + height, "se");
+function startMoving(e, div) {
+    isMoving = true;
+    selectedDiv = div;
+    startX = e.clientX;
+    startY = e.clientY;
+    startLeft = div.offsetLeft;
+    startTop = div.offsetTop;
+    e.stopPropagation();
 }
 
-function desenharAlca(x, y, tipo) {
-    ctx.fillStyle = "black";
-    ctx.fillRect(x - 5, y - 5, 10, 10);
+function moveDiv(e) {
+    if (isMoving && selectedDiv) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        selectedDiv.style.left = `${startLeft + dx}px`;
+        selectedDiv.style.top = `${startTop + dy}px`;
+    }
 }
 
-function calcularBoundingBox() {
-    let xMin = Infinity, yMin = Infinity, xMax = -Infinity, yMax = -Infinity;
-    selecionados.forEach(el => {
-        xMin = Math.min(xMin, el.x);
-        yMin = Math.min(yMin, el.y);
-        xMax = Math.max(xMax, el.x + el.width);
-        yMax = Math.max(yMax, el.y + el.height);
-    });
-    return { x: xMin, y: yMin, width: xMax - xMin, height: yMax - yMin };
-}
+function resizeDiv(e) {
+    if (isResizing && selectedDiv) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
 
-canvas.addEventListener("mousedown", (e) => {
-    const { offsetX: x, offsetY: y } = e;
-    let selecionouAlgo = false;
-    let boundingBox = calcularBoundingBox();
-
-    // Verifica se clicou em uma alça
-    let alcas = [
-        { x: boundingBox.x, y: boundingBox.y, tipo: "nw" },
-        { x: boundingBox.x + boundingBox.width / 2, y: boundingBox.y, tipo: "n" },
-        { x: boundingBox.x + boundingBox.width, y: boundingBox.y, tipo: "ne" },
-        { x: boundingBox.x, y: boundingBox.y + boundingBox.height / 2, tipo: "w" },
-        { x: boundingBox.x + boundingBox.width, y: boundingBox.y + boundingBox.height / 2, tipo: "e" },
-        { x: boundingBox.x, y: boundingBox.y + boundingBox.height, tipo: "sw" },
-        { x: boundingBox.x + boundingBox.width / 2, y: boundingBox.y + boundingBox.height, tipo: "s" },
-        { x: boundingBox.x + boundingBox.width, y: boundingBox.y + boundingBox.height, tipo: "se" }
-    ];
-
-    alcas.forEach(alca => {
-        if (x >= alca.x - 5 && x <= alca.x + 5 && y >= alca.y - 5 && y <= alca.y + 5) {
-            redimensionando = true;
-            alcaSelecionada = alca.tipo;
+        if (selectedHandles.includes('e')) {
+            selectedDiv.style.width = `${startWidth + dx}px`;
         }
-    });
-
-    if (!redimensionando) {
-        elementos.forEach(el => {
-            if (x >= el.x && x <= el.x + el.width && y >= el.y && y <= el.y + el.height) {
-                if (e.shiftKey) {
-                    selecionados.has(el) ? selecionados.delete(el) : selecionados.add(el);
-                } else {
-                    selecionados.clear();
-                    selecionados.add(el);
-                }
-                selecionouAlgo = true;
-                movendo = true;
-            }
-        });
+        if (selectedHandles.includes('s')) {
+            selectedDiv.style.height = `${startHeight + dy}px`;
+        }
+        if (selectedHandles.includes('w')) {
+            selectedDiv.style.left = `${startLeft + dx}px`;
+            selectedDiv.style.width = `${startWidth - dx}px`;
+        }
+        if (selectedHandles.includes('n')) {
+            selectedDiv.style.top = `${startTop + dy}px`;
+            selectedDiv.style.height = `${startHeight - dy}px`;
+        }
     }
+}
 
-    if (!selecionouAlgo && !redimensionando) selecionados.clear();
-    startX = x;
-    startY = y;
-    desenharElementos();
-});
+function stopMovingOrResizing() {
+    isResizing = false;
+    isMoving = false;
+}
 
-canvas.addEventListener("mousemove", (e) => {
-    if (movendo && e.buttons === 1) {
-        selecionados.forEach(el => {
-            el.x += e.movementX;
-            el.y += e.movementY;
-        });
-        desenharElementos();
+function selectDiv(e) {
+    if (e.target !== selectedDiv) {
+        selectedDiv && selectedDiv.classList.remove('selected');
+        selectedDiv = e.target;
+        selectedDiv.classList.add('selected');
+        createResizeHandles(selectedDiv);
     }
+}
 
-    if (redimensionando && e.buttons === 1) {
-        let dx = e.offsetX - startX;
-        let dy = e.offsetY - startY;
-        selecionados.forEach(el => {
-            if (alcaSelecionada.includes("e")) el.width += dx;
-            if (alcaSelecionada.includes("s")) el.height += dy;
-            if (alcaSelecionada.includes("w")) { el.x += dx; el.width -= dx; }
-            if (alcaSelecionada.includes("n")) { el.y += dy; el.height -= dy; }
-        });
-        startX = e.offsetX;
-        startY = e.offsetY;
-        desenharElementos();
+editor.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('resizable-div')) {
+        selectDiv(e);
+    } else {
+        selectedDiv && selectedDiv.classList.remove('selected');
+        selectedDiv = null;
     }
 });
 
-canvas.addEventListener("mouseup", () => {
-    movendo = false;
-    redimensionando = false;
+editor.addEventListener('mousemove', (e) => {
+    if (isResizing) {
+        resizeDiv(e);
+    }
+    if (isMoving && selectedDiv) {
+        moveDiv(e);
+    }
 });
 
-desenharElementos();
+editor.addEventListener('mouseup', stopMovingOrResizing);
+editor.addEventListener('mouseleave', stopMovingOrResizing);

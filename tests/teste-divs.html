@@ -1,63 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movimentar Elementos</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Editor de Divs</title>
   <style>
-    *{
-      margin:0;
-      padding: 0;
+    .editor {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      border: 1px solid black;
     }
-    /* body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-} */
 
-/* #container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-} */
+    .resizable-div {
+      position: absolute;
+      background-color: blue;
+      cursor: move;
+    }
 
-.movable {
-    width: 150px;
-    height: 150px;
-    background-color: #4CAF50;
-    /* color: white;
-    text-align: center;
-    line-height: 150px;
-    border-radius: 10px; */
-    cursor: pointer;
-    position: absolute;
-    resize: horizontal;
-}
+    .resizable-div.selected {
+      border: 2px dashed black;
+    }
 
-#movableElement1{
-  top: 150px;
-  background-color: red;
-}
+    .resize-handle {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+      position: absolute;
+    }
 
+    .nw {
+      top: -5px;
+      left: -5px;
+      cursor: nwse-resize;
+    }
+
+    .n {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: ns-resize;
+    }
+
+    .ne {
+      top: -5px;
+      right: -5px;
+      cursor: nesw-resize;
+    }
+
+    .w {
+      top: 50%;
+      left: -5px;
+      transform: translateY(-50%);
+      cursor: ew-resize;
+    }
+
+    .e {
+      top: 50%;
+      right: -5px;
+      transform: translateY(-50%);
+      cursor: ew-resize;
+    }
+
+    .sw {
+      bottom: -5px;
+      left: -5px;
+      cursor: nesw-resize;
+    }
+
+    .s {
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: ns-resize;
+    }
+
+    .se {
+      bottom: -5px;
+      right: -5px;
+      cursor: nwse-resize;
+    }
   </style>
 </head>
 
 <body>
-  <!-- <div id="container"> -->
-    <div id="movableElement" class="movable">
-    </div>
-    <div id="movableElement1" class="movable">
-      <!-- Arraste-me! -->
-    </div>
-  <!-- </div> -->
-  <script src="./teste-js-2.js"></script>
+  <div class="editor" id="editor">
+    <div class="resizable-div" id="div1" style="top: 100px; left: 100px; width: 150px; height: 100px;"></div>
+    <div class="resizable-div" id="div2" style="top: 200px; left: 300px; width: 120px; height: 80px;"></div>
+  </div>
+
+  <script src="./teste-js.js"></script>
+
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 const movableElement = document.getElementsByClassName("movable");
 
 let isDragging = false;
-let offsetX, offsetY, width, height;
+let offsetX, offsetX_1, offsetY, offsetY_1, width, height;
 
 
 for (const elemento of movableElement) {
@@ -17,7 +17,6 @@ for (const elemento of movableElement) {
         offsetY = e.clientY - elemento.getBoundingClientRect().top;
         // calcula a distancia VERTICAL entre a borda esquerda do elemento
         // e a posição VERTICAL de onde ocorreu o click do mouse
-
 
         //Depuração
         console.log('left:', elemento.getBoundingClientRect().left);
@@ -36,24 +35,60 @@ for (const elemento of movableElement) {
         width = elemento.getBoundingClientRect().width
         height = elemento.getBoundingClientRect().height
 
-        if ((width - offsetX) < 15 && (height - offsetY) < 15) {
-            document.removeEventListener('mousemove', onMouseMove)
-            document.addEventListener('mousemove', dimensionar)
+        document.removeEventListener('mousemove', onMouseMove)
+        if ((width - offsetX) < 15) {
+            document.addEventListener('mousemove', dimDireita)
+
+        } else if ((height - offsetY) < 15) {
+            document.addEventListener('mousemove', dimBaixo)
+
+        } else if ((offsetX) < 15) {
+            document.addEventListener('mousemove', dimEsquerda)
+
+        } else if ((offsetY) < 15) {
+            document.addEventListener('mousemove', dimCima)
 
         } else {
-            document.removeEventListener('mousemove', dimensionar)
+            document.removeEventListener('mousemove', dimDireita)
             document.addEventListener("mousemove", onMouseMove);
             console.log('\n');
         }
         document.addEventListener("mouseup", onMouseUp);
     });
 
-    function dimensionar(e) {
+    function dimDireita(e) {
         const left = e.clientX - elemento.getBoundingClientRect().left
 
-        console.log(left);
+        console.log('left:', left);
 
         elemento.style.width = `${left}px`
+    }
+
+    function dimEsquerda(e) {
+        const right = e.clientX - elemento.getBoundingClientRect().right
+        const left = e.clientX - offsetX;
+
+        elemento.style.left = `${left}px`;
+
+        console.log('right:', right);
+
+        elemento.style.width = `${-right}px`
+    }
+
+    function dimBaixo(e) {
+        const top = e.clientY - elemento.getBoundingClientRect().top
+
+        console.log('top:', top);
+
+        elemento.style.height = `${top}px`
+    }
+
+    function dimCima(e) {
+        const bottom = e.clientY - elemento.getBoundingClientRect().bottom
+
+        console.log('bottom:', bottom);
+
+        elemento.style.height = `${-bottom}px`
     }
 
     function onMouseMove(e) {
@@ -69,7 +104,10 @@ for (const elemento of movableElement) {
     function onMouseUp() {
         isDragging = false;
         document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mousemove", dimensionar);
+        document.removeEventListener("mousemove", dimDireita);
+        document.removeEventListener("mousemove", dimEsquerda);
+        document.removeEventListener("mousemove", dimBaixo);
+        document.removeEventListener("mousemove", dimCima);
         document.removeEventListener("mouseup", onMouseUp);
     }
 }
