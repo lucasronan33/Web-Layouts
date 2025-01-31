@@ -22,6 +22,9 @@ for (const elemento of movableElement) {
         console.log('left:', elemento.getBoundingClientRect().left);
         console.log('top:', elemento.getBoundingClientRect().top);
 
+        console.log('right:', elemento.getBoundingClientRect().right);
+        console.log('bottom:', elemento.getBoundingClientRect().bottom);
+
         console.log('x:', e.clientX);
         console.log('y:', e.clientY);
 
@@ -65,14 +68,15 @@ for (const elemento of movableElement) {
     }
 
     function dimEsquerda(e) {
-        const right = e.clientX - elemento.getBoundingClientRect().right
-        const left = e.clientX - offsetX;
+        const tamanho = (elemento.getBoundingClientRect().right - e.clientX);
+        const mover = (e.clientX - offsetX) + offsetX
 
-        elemento.style.left = `${left}px`;
 
-        console.log('right:', right);
+        console.log('right:', mover);
+        console.log('left:', tamanho);
 
-        elemento.style.width = `${-right}px`
+        elemento.style.width = `${tamanho}px`
+        elemento.style.left = `${mover}px`;
     }
 
     function dimBaixo(e) {
@@ -84,11 +88,13 @@ for (const elemento of movableElement) {
     }
 
     function dimCima(e) {
-        const bottom = e.clientY - elemento.getBoundingClientRect().bottom
+        const bottom = elemento.getBoundingClientRect().bottom - e.clientY
+        const mover = (e.clientY - offsetY) + offsetY
 
         console.log('bottom:', bottom);
 
-        elemento.style.height = `${-bottom}px`
+        elemento.style.height = `${bottom}px`
+        elemento.style.top = `${mover}px`
     }
 
     function onMouseMove(e) {
