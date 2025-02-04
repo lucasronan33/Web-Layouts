@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movimentar Elementos</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
   <style>
     *{
       margin:0;
@@ -51,15 +51,72 @@ img{
   background-size: cover;
 }
 
+.resize{
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border: rgb(0, 182, 182) 2px solid;
+  position: absolute;
+}
+
+.et{
+  top: -4px;
+  left: -4px;
+  cursor: se-resize;
+}
+.t{
+  top: -4px;
+  left: calc(50% - 8px);
+  cursor: s-resize;
+}
+.td{
+  top: -4px;
+  right: -4px;
+  cursor: sw-resize;
+}
+.d{
+  top: calc(50% - 4px);
+  right: -4px;
+  cursor: w-resize;
+}
+.db{
+  bottom: -4px;
+  right: -4px;
+  cursor: se-resize;
+}
+.b{
+  bottom: -4px;
+  right: calc(50% - 4px);
+  cursor: s-resize;
+}
+.be{
+  bottom: -4px;
+  left: -4px;
+  cursor: sw-resize;
+}
+.e{
+  bottom: calc(50% - 4px);
+  left: -4px;
+  cursor: w-resize;
+}
+
   </style>
 </head>
 
 <body>
   <!-- <div id="container"> -->
     <div id="movableElement" class="movable">
-      <img src="./captura.png" alt="" srcset="">
+      <!-- <img src="./captura.png" alt="" srcset=""> -->
     </div>
     <div id="movableElement1" class="movable">
+      <!-- <div class="resize et"></div>
+      <div class="resize t"></div>
+      <div class="resize td"></div>
+      <div class="resize d"></div>
+      <div class="resize db"></div>
+      <div class="resize b"></div>
+      <div class="resize be"></div>
+      <div class="resize e"></div> -->
       <!-- Arraste-me! -->
     </div>
   <!-- </div> -->

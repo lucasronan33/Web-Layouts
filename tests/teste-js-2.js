@@ -2,11 +2,46 @@ const movableElement = document.getElementsByClassName("movable");
 
 let isDragging = false;
 let offsetX, offsetX_1, offsetY, offsetY_1, width, height;
+let selecionado
 
+document.addEventListener('click', (e) => {
+    if (e.target !== selecionado) {
+        let divsResize = selecionado.querySelectorAll('.resize')
+        for (const div of divsResize) {
+            div.remove()
+        }
+    }
+})
 
 for (const elemento of movableElement) {
 
     // e.clientX, e.clientY ===> posição do click do mouse
+
+    elemento.addEventListener('click', (e) => {
+        const verificaDivsResize = elemento.querySelector('.resize')
+        // console.log(verificaDivsResize);
+        console.log('selecionado:', selecionado);
+
+        if (!verificaDivsResize && e.target == elemento) {
+
+            const divsResize = [
+                'et',   //topo esquerdo
+                't',    //top
+                'td',   //topo direito
+                'd',    //direito
+                'db',   //direito baixo
+                'b',    //baixo
+                'be',   //baixo esquerdo
+                'e'     //esquerdo
+            ]
+            for (const classe of divsResize) {
+                const div = document.createElement('div')
+                div.classList.add('resize', classe)
+                elemento.append(div)
+            }
+        }
+        selecionado = elemento
+    })
 
     elemento.addEventListener("mousedown", (e) => {
         isDragging = true;
