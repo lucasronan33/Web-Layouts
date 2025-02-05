@@ -2,25 +2,38 @@ const movableElement = document.getElementsByClassName("movable");
 
 let isDragging = false;
 let offsetX, offsetX_1, offsetY, offsetY_1, width, height;
-let selecionado
+let selecionado = 0
 
-document.addEventListener('click', (e) => {
+function ativaDesativaDivsResize(e) {
     if (e.target !== selecionado) {
-        let divsResize = selecionado.querySelectorAll('.resize')
-        for (const div of divsResize) {
-            div.remove()
+        try {
+            let divsResize = selecionado.querySelectorAll('.resize')
+            for (const div of divsResize) {
+                div.remove()
+            }
+        } catch (error) {
+            console.log(error);
+
         }
     }
+}
+
+document.addEventListener('click', (e) => {
+    ativaDesativaDivsResize(e)
+    // const verificaDivsResize=selecionado.querySelector
+    console.log('remove:', selecionado);
+
 })
 
 for (const elemento of movableElement) {
 
     // e.clientX, e.clientY ===> posição do click do mouse
 
-    elemento.addEventListener('click', (e) => {
+    elemento.addEventListener('mousedown', (e) => {
         const verificaDivsResize = elemento.querySelector('.resize')
         // console.log(verificaDivsResize);
         console.log('selecionado:', selecionado);
+        ativaDesativaDivsResize(e)
 
         if (!verificaDivsResize && e.target == elemento) {
 
