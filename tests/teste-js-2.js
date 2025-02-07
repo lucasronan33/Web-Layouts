@@ -1,7 +1,7 @@
 const movableElement = document.getElementsByClassName("movable");
 
 let isDragging = false;
-let offsetX, offsetX_1, offsetY, offsetY_1, width, height;
+let offsetX, offsetY, width, height;
 let selecionado = 0
 
 function ativaDesativaDivsResize(e) {
@@ -87,16 +87,33 @@ for (const elemento of movableElement) {
         height = elemento.getBoundingClientRect().height
 
         document.removeEventListener('mousemove', onMouseMove)
-        if ((width - offsetX) < 15) {
+
+        if ((width - offsetX) < 15 && (height - offsetY) < 15) {
+            document.addEventListener('mousemove', dimBaixo)
+            document.addEventListener('mousemove', dimDireita)
+        }
+        else if ((width - offsetX) < 15 && offsetY < 15) {
+            document.addEventListener('mousemove', dimCima)
+            document.addEventListener('mousemove', dimDireita)
+        }
+        else if (offsetX < 15 && (height - offsetY) < 15) {
+            document.addEventListener('mousemove', dimEsquerda)
+            document.addEventListener('mousemove', dimBaixo)
+        }
+        else if (offsetX < 15 && offsetY < 15) {
+            document.addEventListener('mousemove', dimEsquerda)
+            document.addEventListener('mousemove', dimCima)
+        }
+        else if ((width - offsetX) < 15) {
             document.addEventListener('mousemove', dimDireita)
 
         } else if ((height - offsetY) < 15) {
             document.addEventListener('mousemove', dimBaixo)
 
-        } else if ((offsetX) < 15) {
+        } else if (offsetX < 15) {
             document.addEventListener('mousemove', dimEsquerda)
 
-        } else if ((offsetY) < 15) {
+        } else if (offsetY < 15) {
             document.addEventListener('mousemove', dimCima)
 
         } else {
