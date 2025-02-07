@@ -88,9 +88,19 @@ for (const elemento of movableElement) {
 
         document.removeEventListener('mousemove', onMouseMove)
 
+        // DIMENSIONAMENTO LIVRE
         if ((width - offsetX) < 15 && (height - offsetY) < 15) {
             document.addEventListener('mousemove', dimBaixo)
             document.addEventListener('mousemove', dimDireita)
+
+            document.addEventListener('keydown', (e) => {
+                if (e.shiftKey) {
+                    console.log('SHIFT pressionado');
+
+                    elemento.style.aspectRatio = 1
+
+                }
+            })
         }
         else if ((width - offsetX) < 15 && offsetY < 15) {
             document.addEventListener('mousemove', dimCima)
@@ -104,6 +114,9 @@ for (const elemento of movableElement) {
             document.addEventListener('mousemove', dimEsquerda)
             document.addEventListener('mousemove', dimCima)
         }
+        // --------------------------
+
+        // DIMENSIONAMENTO UNILATERAL
         else if ((width - offsetX) < 15) {
             document.addEventListener('mousemove', dimDireita)
 
@@ -115,8 +128,10 @@ for (const elemento of movableElement) {
 
         } else if (offsetY < 15) {
             document.addEventListener('mousemove', dimCima)
+        }
+        // ----------------------------
 
-        } else {
+        else {
             document.removeEventListener('mousemove', dimDireita)
             document.addEventListener("mousemove", onMouseMove);
             console.log('\n');
