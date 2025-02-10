@@ -89,18 +89,20 @@ for (const elemento of movableElement) {
         document.removeEventListener('mousemove', onMouseMove)
 
         // DIMENSIONAMENTO LIVRE
+
+        let shiftPressionado = false
+
+        document.addEventListener('keydown', e => {
+            if (e.shiftKey) shiftPressionado = true
+            console.log('SHIFT pressionado');
+
+        })
+        document.addEventListener('keyup', () => shiftPressionado = false)
+
         if ((width - offsetX) < 15 && (height - offsetY) < 15) {
             document.addEventListener('mousemove', dimBaixo)
             document.addEventListener('mousemove', dimDireita)
 
-            document.addEventListener('keydown', (e) => {
-                if (e.shiftKey) {
-                    console.log('SHIFT pressionado');
-
-                    elemento.style.aspectRatio = 1
-
-                }
-            })
         }
         else if ((width - offsetX) < 15 && offsetY < 15) {
             document.addEventListener('mousemove', dimCima)

@@ -4,94 +4,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editor de Divs</title>
+  <title>Redimensionar com Proporção Travada</title>
   <style>
-    .editor {
-      position: relative;
-      width: 800px;
-      height: 600px;
-      border: 1px solid black;
-    }
-
-    .resizable-div {
+    /* Estilo do elemento redimensionável */
+    #resizable {
+      width: 150px;
+      height: 150px;
+      background-color: #4CAF50;
       position: absolute;
-      background-color: blue;
-      cursor: move;
+      top: 50px;
+      left: 50px;
+      user-select: none;
     }
 
-    .resizable-div.selected {
-      border: 2px dashed black;
-    }
-
-    .resize-handle {
-      width: 10px;
-      height: 10px;
-      background-color: black;
+    /* "Handle" para redimensionamento (canto inferior direito) */
+    #handle {
+      width: 15px;
+      height: 15px;
+      background-color: #333;
       position: absolute;
-    }
-
-    .nw {
-      top: -5px;
-      left: -5px;
-      cursor: nwse-resize;
-    }
-
-    .n {
-      top: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      cursor: ns-resize;
-    }
-
-    .ne {
-      top: -5px;
-      right: -5px;
-      cursor: nesw-resize;
-    }
-
-    .w {
-      top: 50%;
-      left: -5px;
-      transform: translateY(-50%);
-      cursor: ew-resize;
-    }
-
-    .e {
-      top: 50%;
-      right: -5px;
-      transform: translateY(-50%);
-      cursor: ew-resize;
-    }
-
-    .sw {
-      bottom: -5px;
-      left: -5px;
-      cursor: nesw-resize;
-    }
-
-    .s {
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      cursor: ns-resize;
-    }
-
-    .se {
-      bottom: -5px;
-      right: -5px;
-      cursor: nwse-resize;
+      right: 0;
+      bottom: 0;
+      cursor: se-resize;
     }
   </style>
 </head>
 
 <body>
-  <div class="editor" id="editor">
-    <div class="resizable-div" id="div1" style="top: 100px; left: 100px; width: 150px; height: 100px;"></div>
-    <div class="resizable-div" id="div2" style="top: 200px; left: 300px; width: 120px; height: 80px;"></div>
+  <div id="resizable">
+    <div id="handle"></div>
   </div>
 
-  <script src="./teste-js.js"></script>
+  <script>
+    // Seleciona o elemento redimensionável e o handle
+    const resizable = document.getElementById('resizable');
+    const handle = document.getElementById('handle');
 
+    let isResizing = false;
+    let isShiftPressed = false;
+
+    // Guarda a proporção original do elemento
+    const initialWidth = resizable.clientWidth;
+    const initialHeight = resizable.clientHeight;
+    const aspectRatio = initialWidth / initialHeight;
+
+    // Inicia o redimensionamento ao clicar no handle
+    handle.addEventListener('mousedown', (e) => {
+      isResizing = true;
+      // Evita seleção de texto enquanto arrasta
+      e.preventDefault();
+      document.addEventListener('mousemove', resize);
+      document.addEventListener('mouseup', stopResize);
+    });
+
+    // Detecta o pressionamento do SHIFT
+    document.addEventListener('keydown', (e) => {
+      if (e.shiftKey) {
+        isShiftPressed = true;
+      }
+    });
+
+    // Detecta a liberação do SHIFT
+    document.addEventListener('keyup', (e) => {
+      if (!e.shiftKey) {
+        isShiftPressed = false;
+      }
+    });
+
+    function resize(e) {
+      if (!isResizing) return;
+
+      // Pega a posição atual do elemento redimensionável
+      const rect = resizable.getBoundingClientRect();
+      const startX = rect.left;
+      const startY = rect.top;
+
+      // Calcula as novas dimensões baseadas na posição do mouse
+      let newWidth = e.clientX - startX;
+      let newHeight = e.clientY - startY;
+
+      if (isShiftPressed) {
+        // Se SHIFT estiver pressionado, trava a proporção.
+        // Você pode optar por basear o novo tamanho na largura ou na altura.
+        // Exemplo: usa a largura para calcular a altura mantendo a proporção:
+        newHeight = newWidth / aspectRatio;
+        // Se preferir basear na altura, faça:
+        // newWidth = newHeight * aspectRatio;
+      }
+
+      // Define um tamanho mínimo para evitar dimensões negativas ou muito pequenas
+      newWidth = Math.max(newWidth, 50);
+      newHeight = Math.max(newHeight, 50);
+
+      // Aplica as novas dimensões ao elemento
+      resizable.style.width = newWidth + 'px';
+      resizable.style.height = newHeight + 'px';
+    }
+
+    function stopResize() {
+      isResizing = false;
+      document.removeEventListener('mousemove', resize);
+      document.removeEventListener('mouseup', stopResize);
+    }
+  </script>
 </body>
 
 </html>
