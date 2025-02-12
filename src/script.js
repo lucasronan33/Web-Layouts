@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   slct_tipo_impressao.addEventListener("change", (event) => {
     const tipoSelecionado = slct_tipo_impressao.value;
 
-    console.log(slct_tipo_impressao.value);
+    // console.log(slct_tipo_impressao.value);
     if (slct_tipo_impressao.value !== "recorte") {
       label_tipoImpressao.style.display = "block";
     } else {
@@ -157,13 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
           '.'
           '.'`;
 
-        console.log(
-          estilos.impressao.style.display,
-          estilos.cores.style.display,
-          estilos.calco.style.display,
-          estilos.corte.style.display,
-          estilos.bainha.style.display
-        );
+        // console.log(
+        //   estilos.impressao.style.display,
+        //   estilos.cores.style.display,
+        //   estilos.calco.style.display,
+        //   estilos.corte.style.display,
+        //   estilos.bainha.style.display
+        // );
 
         break;
     }
