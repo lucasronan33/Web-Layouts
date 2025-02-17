@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Gotham Bold";
-  src: url(/fonts/Gotham\ Bold.otf);
+  src: url(../fonts/Gotham\ Bold.otf);
 }
 
 * {
