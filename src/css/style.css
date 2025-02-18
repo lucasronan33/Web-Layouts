@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Gotham Bold";
-  src: url(../fonts/Gotham\ Bold.otf);
+  src: url(/fonts/Gotham\ Bold.otf);
 }
 
 * {
@@ -73,7 +73,7 @@ body {
       .nav_bar {
         width: 177.2654px;
         height: 100%;
-        background-image: url(../img/fundo_nav_bar.png);
+        background-image: url(/img/fundo_nav_bar.png);
         background-size: cover;
         margin: 0;
 
@@ -301,7 +301,7 @@ body {
       .nmr_OS {
         width: 111.7173px;
         height: 17.4086px;
-        background-image: url(../img/fundo_nmr_os.png);
+        background-image: url(/img/fundo_nmr_os.png);
         background-size: cover;
         margin: var(--margin_topo) 0px 0px 2.7436px;
         grid-area: nmr_os;
@@ -332,7 +332,7 @@ body {
         height: 26.9729px;
         margin: var(--margin_topo) 5.1526px 0px 0px;
 
-        background-image: url(../img/logo_showmais.png);
+        background-image: url(/img/logo_showmais.png);
         background-size: cover;
         grid-area: logo;
       }
@@ -441,7 +441,7 @@ body {
       .nav_bar_dir {
         width: 8.6596px;
         height: 595.2756px;
-        background-image: url(../img/fundo_nav_bar_dir.png);
+        background-image: url(/img/fundo_nav_bar_dir.png);
         background-size: cover;
         grid-area: nav_bar_dir;
       }
@@ -449,7 +449,7 @@ body {
       .nome_arte {
         width: 111.7173px;
         height: 17.4086px;
-        background-image: url(../img/fundo_nome_arte.png);
+        background-image: url(/img/fundo_nome_arte.png);
         background-size: cover;
         background-clip: content-box;
 
@@ -470,7 +470,7 @@ body {
       #nome_caminho {
         width: 648.948px;
         height: 17.4086px;
-        background-image: url(../img/fundo_nome_caminho.png);
+        background-image: url(/img/fundo_nome_caminho.png);
         background-size: cover;
         grid-area: nome_caminho;
         margin: 0px 0px 2.7436px 3.2211px;
