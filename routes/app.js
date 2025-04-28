@@ -3,7 +3,7 @@ const fs = require("fs"); //biblioteca nativa Node
 const path = require("path"); //biblioteca nativa Node
 
 const app = express();
-const port = 3000;
+const port = 4000;
 
 // Configurando engine EJS
 app.set("view engine", "ejs");

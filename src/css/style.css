@@ -163,19 +163,20 @@ body {
 
           .grupo_quantidade {
             display: flex;
-            height: 50%;
+            height: 45%;
+            gap: 1px;
 
             * {
               height: 100%;
             }
 
             input {
-              width: 49%;
+              width: 47%;
               text-align: right;
             }
 
             select {
-              width: 49%;
+              width: 47%;
 
               option {
                 text-align: left;
@@ -218,28 +219,6 @@ body {
 
           .quantidade {
             grid-area: quantidade;
-
-            .grupo_quantidade {
-              display: flex;
-
-              input {
-                width: 25%;
-                height: 100%;
-                margin-inline: auto 1px;
-                text-align: right;
-              }
-
-              select {
-                width: auto;
-                height: 100%;
-                display: flex;
-                margin-inline: 0px auto;
-
-                option {
-                  text-align: left;
-                }
-              }
-            }
           }
 
           .impressao {
@@ -493,6 +472,7 @@ body {
         }
       }
     }
+
     button#btnSaveAsPNG {
       padding: 2vh 4vh;
       background-color: var(--cor_fonte_1);
@@ -502,12 +482,14 @@ body {
       cursor: pointer;
       transition: 0.2s linear;
     }
+
     button:hover {
       background-color: var(--cor_fonte_2);
       color: var(--cor_fonte_1);
       box-shadow: 0vh 0vh 2vh 0vh var(--cor_fonte_3);
       transition: 0.1s linear;
     }
+
     button:active {
       box-shadow: 0 var(--cor_fonte_3);
     }
@@ -549,12 +531,14 @@ body {
         cursor: pointer;
         transition: 0.2s linear;
       }
+
       button:hover {
         background-color: var(--cor_fonte_3);
         color: var(--cor_fonte_2);
         box-shadow: 0vh 0vh 1vh 0vh var(--cor_fonte_2);
         transition: 0.1s linear;
       }
+
       button:active {
         box-shadow: 0 var(--cor_fonte_2);
       }
@@ -570,18 +554,20 @@ body {
         color: var(--cor_fonte_2);
         cursor: pointer;
 
-        .divCheckboxes{
+        .divCheckboxes {
           width: 100%;
           display: flex;
           justify-content: space-between;
 
-          .chkArquivoSelecao + label{
+          .chkArquivoSelecao+label {
             margin: 0;
           }
-          .chkMedidasArquivo + label{
+
+          .chkMedidasArquivo+label {
             margin: 0;
           }
         }
+
         .arquivoSelecao {
           width: 300px;
           height: 300px;
@@ -589,8 +575,9 @@ body {
           background-color: var(--cor_fonte_3);
           display: flex;
           align-items: center;
-          
-          img,canvas{
+
+          img,
+          canvas {
             max-width: 100%;
             max-height: 100%;
             background-size: contain;
@@ -598,7 +585,8 @@ body {
         }
       }
     }
-    #box-arquivo + .divButtons {
+
+    #box-arquivo+.divButtons {
       margin-top: 0;
       display: none;
     }
@@ -609,10 +597,12 @@ body {
 input[type="checkbox"] {
   display: none;
 }
-input[type="checkbox"] + label {
+
+input[type="checkbox"]+label {
   cursor: pointer;
 }
-input[type="checkbox"] + label::before {
+
+input[type="checkbox"]+label::before {
   width: 18px;
   height: 18px;
   margin-right: 1vh;
@@ -624,7 +614,7 @@ input[type="checkbox"] + label::before {
   border-radius: 25%;
 }
 
-input[type="checkbox"]:checked + label::before {
+input[type="checkbox"]:checked+label::before {
   background-size: contain;
   background-image: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 10 10'%3E%3Cg class='nc-icon-wrapper' stroke-width='1' fill='%23555555'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' data-cap='butt' d='M2.83 4.72l1.58 1.58 2.83-2.83'/%3E%3C/g%3E%3C/svg%3E");
   background-color: var(--cor_fonte_3);
