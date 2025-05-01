@@ -20,7 +20,7 @@ function updateFormInputs() {
   });
 }
 
-document.getElementById("btnSaveAsPNG").addEventListener("click", () => {
+document.querySelector(".btnSaveAsPNG").addEventListener("click", () => {
   updateFormInputs()
 
   const elemento = document.querySelector("form"); // Elemento que você quer capturar (ou outro ID)

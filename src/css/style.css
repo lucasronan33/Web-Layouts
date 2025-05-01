@@ -473,7 +473,7 @@ body {
       }
     }
 
-    button#btnSaveAsPNG {
+    .btn {
       padding: 2vh 4vh;
       background-color: var(--cor_fonte_1);
       color: var(--cor_fonte_2);
@@ -483,14 +483,14 @@ body {
       transition: 0.2s linear;
     }
 
-    button:hover {
+    .btn:hover {
       background-color: var(--cor_fonte_2);
       color: var(--cor_fonte_1);
       box-shadow: 0vh 0vh 2vh 0vh var(--cor_fonte_3);
       transition: 0.1s linear;
     }
 
-    button:active {
+    .btn:active {
       box-shadow: 0 var(--cor_fonte_3);
     }
   }

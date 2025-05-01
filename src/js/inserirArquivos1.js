@@ -310,9 +310,7 @@ botao.addEventListener("click", () => {
                                             gerarCotas(arquivo_layout.naturalWidth, arquivo_layout.naturalHeight, cotaLargura, cotaAltura)
                                         }
 
-                                        srcLixeira.addEventListener("click", () => {
-                                            container_img.remove(); // Remove a div pai da lixeira
-                                        })
+
                                     }//fim condicional checkboxMedidasInserir
                                 }//fim condicional checkbox das paginas selecionadas
                             }//fim do FOR para iteração das checkbox
