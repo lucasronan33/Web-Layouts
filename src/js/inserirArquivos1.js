@@ -129,6 +129,9 @@ function criarEstruturaLayout() {
     let img_lixeira = document.createElement("div");
     img_lixeira.classList.add("img-lixeira");
     container_img.appendChild(img_lixeira);
+    img_lixeira.addEventListener('click', () => {
+        img_lixeira.parentElement.remove()
+    })
 
     let lixeira = document.createElement("div");
     lixeira.classList.add("lixeira");
